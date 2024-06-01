@@ -44,7 +44,9 @@ public class LoginController {
 
         if (admin.isPresent()) {
             session.setAttribute(keyusername, admin.get());
-            return "redirect:/home";
+            model.addAttribute("pageTitle", "Home page");
+            model.addAttribute("subTitle", "Loko Race - Home page");
+            return "pages/home";
         }
         else {
             model.addAttribute("message", "Admin absent de la base de données");
@@ -67,7 +69,9 @@ public class LoginController {
 
         if (equipe.isPresent()) {
             session.setAttribute(keyusername, equipe.get());
-            return "redirect:/home";
+            model.addAttribute("pageTitle", "Home page");
+            model.addAttribute("subTitle", "Loko Race - Home page");
+            return "pages/home";
         }
         else {
             model.addAttribute("message", "Equipe absente de la base de données");
@@ -83,7 +87,7 @@ public class LoginController {
     }
     @GetMapping("/access-denied")
     public String accessDenied() {
-        return "pages/access-denied";
+        return "pages/error/error-403";
     }
 ///////////////////
 
