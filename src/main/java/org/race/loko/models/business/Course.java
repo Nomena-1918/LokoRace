@@ -1,4 +1,4 @@
-package org.race.loko.model.business;
+package org.race.loko.models.business;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -111,7 +111,7 @@
       });
     };
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Delay');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Delay');
 
     const pickFile = editor => new Promise(resolve => {
       let resolved = false;

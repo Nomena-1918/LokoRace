@@ -9,7 +9,7 @@
 
     var global$1 = tinymce.util.Tools.resolve('tinymce.dom.RangeUtils');
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const option = name => editor => editor.options.get(name);
     const register$2 = editor => {

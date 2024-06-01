@@ -1789,7 +1789,7 @@
 
     var createInitialState = function createInitialState(options) {
         return {
-            // model
+            // models
             items: [],
 
             // timeout used for calling update items
@@ -5690,7 +5690,7 @@
             // original source
             source: null,
 
-            // file model reference
+            // file models reference
             file: file,
 
             // id of file on server

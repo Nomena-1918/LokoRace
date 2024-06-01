@@ -1,16 +1,16 @@
 -- VUE POUR AVOIR LES RANGS DES COUREURS PAR ETAPE
-create or replace view v_rang_coureur_etape as
+CREATE OR REPLACE VIEW v_rang_coureur_etape AS
 SELECT id,
        id_coureur,
        id_etape,
        dateheure_depart,
        dateheure_arrivee,
        duree_penalite,
-       (coalesce(dateheure_arrivee, now()) - dateheure_depart + duree_penalite)   as duree_course,
-       ROW_NUMBER()
-       OVER (PARTITION BY id_etape ORDER BY (dateheure_arrivee + duree_penalite)) AS rang_coureur
+       (COALESCE(dateheure_arrivee, NOW()) - dateheure_depart + duree_penalite) AS duree_course,
+       RANK() OVER (PARTITION BY id_etape ORDER BY (dateheure_arrivee + duree_penalite)) AS rang_coureur
 FROM coureur_etapes
 ORDER BY id_etape, dateheure_arrivee;
+
 
 -- VUE POUR AVOIR LES RANGS DES COUREURS EN FONCTION DE LEUR RANG
 create or replace view v_classement_etape as

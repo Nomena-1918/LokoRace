@@ -7987,7 +7987,7 @@
       }
     });
 
-    var global$9 = tinymce.util.Tools.resolve('tinymce.util.Delay');
+    var global$9 = tinymce.util.Tools.resolve('tinymce.utils.Delay');
 
     const factory$n = detail => {
       const events = events$a(detail.action);
@@ -8055,7 +8055,7 @@
       };
     };
 
-    var global$8 = tinymce.util.Tools.resolve('tinymce.util.I18n');
+    var global$8 = tinymce.util.Tools.resolve('tinymce.utils.I18n');
 
     const rtlTransform = {
       'indent': true,
@@ -10348,7 +10348,7 @@
     };
     const onActionExecCommand = (editor, command) => () => editor.execCommand(command);
 
-    var global$4 = tinymce.util.Tools.resolve('tinymce.util.LocalStorage');
+    var global$4 = tinymce.util.Tools.resolve('tinymce.utils.LocalStorage');
 
     const cacheStorage = {};
     const ColorCache = (storageId, max = 10) => {
@@ -14462,7 +14462,7 @@
       };
     };
 
-    var global$1 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$1 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const filterByExtension = (files, providersBackstage) => {
       const allowedImageFileTypes = global$1.explode(providersBackstage.getOption('images_file_types'));
@@ -30010,7 +30010,7 @@
       };
     };
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.URI');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.URI');
 
     const getUrlDialogApi = root => {
       const withRoot = f => {

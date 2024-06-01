@@ -39,7 +39,7 @@
     const isNullable = a => a === null || a === undefined;
     const isNonNullable = a => !isNullable(a);
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     class Optional {
       constructor(tag, value) {

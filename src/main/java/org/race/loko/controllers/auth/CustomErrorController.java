@@ -1,4 +1,4 @@
-package org.race.loko.controller.auth;
+package org.race.loko.controllers.auth;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;

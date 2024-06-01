@@ -160,7 +160,7 @@
 
     var global$2 = tinymce.util.Tools.resolve('tinymce.Env');
 
-    var global$1 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$1 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const nativeSlice = Array.prototype.slice;
     const nativePush = Array.prototype.push;

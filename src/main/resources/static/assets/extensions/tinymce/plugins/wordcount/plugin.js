@@ -350,7 +350,7 @@
       };
     };
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Delay');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Delay');
 
     const fireWordCountUpdate = (editor, api) => {
       editor.dispatch('wordCountUpdate', {

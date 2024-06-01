@@ -1,6 +1,6 @@
-package org.race.loko.repository.profil;
+package org.race.loko.repositories.profil;
 
-import org.race.loko.model.profil.Admin;
+import org.race.loko.models.profil.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

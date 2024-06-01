@@ -1903,7 +1903,7 @@ function _fnHungarianMap ( o )
 /**
  * Convert from camel case parameters to Hungarian, based on a Hungarian map
  * created by _fnHungarianMap.
- *  @param {object} src The model object which holds all parameters that can be
+ *  @param {object} src The models object which holds all parameters that can be
  *    mapped.
  *  @param {object} user The object to convert from camel case to Hungarian.
  *  @param {boolean} force When set to `true`, properties which already have a
@@ -9491,7 +9491,7 @@ DataTable.tables = DataTable.fnTables = function ( visible )
  * either the 1.9 style Hungarian notation, or the 1.10+ style camelCase
  * parameters.
  *
- *  @param {object} src The model object which holds all parameters that can be
+ *  @param {object} src The models object which holds all parameters that can be
  *    mapped.
  *  @param {object} user The object to convert from camel case to Hungarian.
  *  @param {boolean} force When set to `true`, properties which already have a
@@ -12322,7 +12322,7 @@ _fnHungarianMap( DataTable.defaults );
 
 
 /*
- * Developer note - See note in model.defaults.js about the use of Hungarian
+ * Developer note - See note in models.defaults.js about the use of Hungarian
  * notation and camel case.
  */
 
@@ -14902,7 +14902,7 @@ $.extend( true, DataTable.ext.renderer, {
 
 
 
-// Built in type detection. See model.ext.aTypes for information about
+// Built in type detection. See models.ext.aTypes for information about
 // what is required from this methods.
 $.extend( DataTable.ext.type.detect, [
 	// Plain numbers - first since V8 detects some plain numbers as dates
@@ -14957,7 +14957,7 @@ $.extend( DataTable.ext.type.detect, [
 
 
 
-// Filter formatting functions. See model.ext.ofnSearch for information about
+// Filter formatting functions. See models.ext.ofnSearch for information about
 // what is required from these methods.
 // 
 // Note that additional search methods are added for the html numbers and

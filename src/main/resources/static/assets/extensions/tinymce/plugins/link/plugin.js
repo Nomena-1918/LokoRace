@@ -292,7 +292,7 @@
     const allowUnsafeLinkTarget = option('allow_unsafe_link_target');
     const useQuickLink = option('link_quicklink');
 
-    var global$4 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$4 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const getValue = item => isString(item.value) ? item.value : '';
     const getText = item => {
@@ -367,7 +367,7 @@
 
     var global$3 = tinymce.util.Tools.resolve('tinymce.dom.TreeWalker');
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.URI');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.utils.URI');
 
     const isAnchor = elm => isNonNullable(elm) && elm.nodeName.toLowerCase() === 'a';
     const isLink = elm => isAnchor(elm) && !!getHref(elm);
@@ -679,7 +679,7 @@
       getDelta
     };
 
-    var global$1 = tinymce.util.Tools.resolve('tinymce.util.Delay');
+    var global$1 = tinymce.util.Tools.resolve('tinymce.utils.Delay');
 
     const delayedConfirm = (editor, message, callback) => {
       const rng = editor.selection.getRng();
@@ -980,7 +980,7 @@
       });
     };
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.VK');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.VK');
 
     const appendClickRemove = (link, evt) => {
       document.body.appendChild(link);

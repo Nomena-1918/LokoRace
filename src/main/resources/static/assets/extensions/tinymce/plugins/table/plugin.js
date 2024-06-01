@@ -883,7 +883,7 @@
       getColumnAt
     };
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const getTDTHOverallStyle = (dom, elm, name) => {
       const cells = dom.select('td,th', elm);

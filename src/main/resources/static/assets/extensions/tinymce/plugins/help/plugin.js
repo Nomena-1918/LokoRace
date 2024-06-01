@@ -259,7 +259,7 @@
 
     var global$3 = tinymce.util.Tools.resolve('tinymce.Resource');
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.I18n');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.utils.I18n');
 
     const pLoadHtmlByLangCode = (baseUrl, langCode) => global$3.load(`tinymce.html-i18n.help-keynav.${ langCode }`, `${ baseUrl }/js/i18n/keynav/${ langCode }.js`);
     const pLoadI18nHtml = baseUrl => pLoadHtmlByLangCode(baseUrl, global$2.getCode()).catch(() => pLoadHtmlByLangCode(baseUrl, 'en'));

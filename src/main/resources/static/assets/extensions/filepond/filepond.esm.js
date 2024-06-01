@@ -1525,7 +1525,7 @@ const createOptions = options => {
 };
 
 const createInitialState = options => ({
-    // model
+    // models
     items: [],
 
     // timeout used for calling update items
@@ -3512,7 +3512,7 @@ const createItem = (origin = null, serverFileReference = null, file = null) => {
         // original source
         source: null,
 
-        // file model reference
+        // file models reference
         file,
 
         // id of file on server

@@ -735,7 +735,7 @@
     const accordionBodyWrapperClass = 'mce-accordion-body';
     const accordionBodyWrapperTag = 'div';
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const isSummary = node => (node === null || node === void 0 ? void 0 : node.nodeName) === 'SUMMARY';
     const isDetails = node => (node === null || node === void 0 ? void 0 : node.nodeName) === 'DETAILS';
@@ -961,7 +961,7 @@
       });
     };
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.VK');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.VK');
 
     const setupEnterKeyInSummary = editor => {
       editor.on('keydown', event => {

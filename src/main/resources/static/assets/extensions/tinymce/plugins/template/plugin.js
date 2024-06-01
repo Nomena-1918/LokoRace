@@ -62,7 +62,7 @@
 
     const escape = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const option = name => editor => editor.options.get(name);
     const register$2 = editor => {

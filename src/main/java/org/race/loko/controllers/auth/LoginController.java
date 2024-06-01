@@ -1,10 +1,10 @@
-package org.race.loko.controller.auth;
+package org.race.loko.controllers.auth;
 
 import jakarta.servlet.http.HttpSession;
-import org.race.loko.model.profil.Admin;
-import org.race.loko.model.profil.Equipe;
-import org.race.loko.repository.profil.AdminRepository;
-import org.race.loko.repository.profil.EquipeRepository;
+import org.race.loko.models.profil.Admin;
+import org.race.loko.models.profil.Equipe;
+import org.race.loko.repositories.profil.AdminRepository;
+import org.race.loko.repositories.profil.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

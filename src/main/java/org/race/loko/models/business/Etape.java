@@ -1,10 +1,12 @@
-package org.race.loko.model.business;
+package org.race.loko.models.business;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.race.loko.utils.DateTimeUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.StringJoiner;
 
 @Setter
@@ -32,6 +34,9 @@ public class Etape {
     @Column(name = "nombre_coureur_equipe", nullable = false)
     private Integer nombreCoureurEquipe;
 
+    @OneToMany(mappedBy = "etape")
+    private List<CoureurEtape> coureursEtape;
+
     @ManyToOne
     @JoinColumn(name = "id_course", nullable = false)
     private Course course;
@@ -47,5 +52,14 @@ public class Etape {
                 .add("nombreCoureurEquipe=" + nombreCoureurEquipe)
                 .add("course=" + course)
                 .toString();
+    }
+
+    public String getDateHeureDebutStr() {
+        return DateTimeUtils.formatFR(dateHeureDebut);
+    }
+
+    public Etape setId(Long id) {
+        this.id = id;
+        return this;
     }
 }

@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.race.loko.model.profil.Admin;
+import org.race.loko.models.profil.Admin;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;

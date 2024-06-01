@@ -122,7 +122,7 @@
       };
     };
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const onSetupEditable = editor => api => {
       const nodeChanged = () => {

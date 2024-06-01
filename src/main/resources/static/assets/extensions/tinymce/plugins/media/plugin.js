@@ -212,7 +212,7 @@
     const hasPoster = option('media_poster');
     const hasDimensions = option('media_dimensions');
 
-    var global$5 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global$5 = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     var global$4 = tinymce.util.Tools.resolve('tinymce.dom.DOMUtils');
 

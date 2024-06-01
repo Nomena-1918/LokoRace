@@ -1,9 +1,8 @@
-package org.race.loko.repository.profil;
+package org.race.loko.repositories.profil;
 
-import org.race.loko.model.profil.Equipe;
+import org.race.loko.models.profil.Equipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

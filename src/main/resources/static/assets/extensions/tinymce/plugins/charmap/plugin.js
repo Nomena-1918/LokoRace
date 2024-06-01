@@ -188,7 +188,7 @@
     };
     const bind = (xs, f) => flatten(map(xs, f));
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const option = name => editor => editor.options.get(name);
     const register$2 = editor => {

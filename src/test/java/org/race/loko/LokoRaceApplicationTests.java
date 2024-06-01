@@ -1,8 +1,8 @@
 package org.race.loko;
 
 import org.junit.jupiter.api.Test;
-import org.race.loko.repository.business.CourseRepository;
-import org.race.loko.repository.business.EtapeRepository;
+import org.race.loko.repositories.business.CourseRepository;
+import org.race.loko.repositories.business.EtapeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 

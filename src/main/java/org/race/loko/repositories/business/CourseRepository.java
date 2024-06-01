@@ -1,6 +1,6 @@
-package org.race.loko.repository.business;
+package org.race.loko.repositories.business;
 
-import org.race.loko.model.business.Course;
+import org.race.loko.models.business.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

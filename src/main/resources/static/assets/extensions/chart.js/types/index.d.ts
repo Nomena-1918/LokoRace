@@ -591,7 +591,7 @@ export declare class DatasetController<
   readonly index: number;
   readonly _cachedMeta: ChartMeta<TType, TElement, TDatasetElement>;
   enableOptionSharing: boolean;
-  // If true, the controller supports the decimation
+  // If true, the controllers supports the decimation
   // plugin. Defaults to `false` for all controllers
   // except the LineController
   supportsDecimation: boolean;

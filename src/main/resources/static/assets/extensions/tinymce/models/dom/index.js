@@ -1,4 +1,4 @@
-// Exports the "dom" model for usage with module loaders
+// Exports the "dom" models for usage with module loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/models/dom')

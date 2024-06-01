@@ -1,7 +1,6 @@
-package org.race.loko.controller;
+package org.race.loko.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller

@@ -254,7 +254,7 @@
 
     var global$3 = tinymce.util.Tools.resolve('tinymce.dom.DOMUtils');
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.URI');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.utils.URI');
 
     const isNotEmpty = s => s.length > 0;
 
@@ -803,9 +803,9 @@
     };
     const deepMerge = baseMerge(deep);
 
-    var global$1 = tinymce.util.Tools.resolve('tinymce.util.ImageUploader');
+    var global$1 = tinymce.util.Tools.resolve('tinymce.utils.ImageUploader');
 
-    var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var global = tinymce.util.Tools.resolve('tinymce.utils.Tools');
 
     const getValue = item => isString(item.value) ? item.value : '';
     const getText = item => {
