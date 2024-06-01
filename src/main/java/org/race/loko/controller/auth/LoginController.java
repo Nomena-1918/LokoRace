@@ -44,7 +44,7 @@ public class LoginController {
 
         if (admin.isPresent()) {
             session.setAttribute(keyusername, admin.get());
-            return "redirect:/admin/home";
+            return "redirect:/home";
         }
         else {
             model.addAttribute("message", "Admin absent de la base de données");
@@ -67,7 +67,7 @@ public class LoginController {
 
         if (equipe.isPresent()) {
             session.setAttribute(keyusername, equipe.get());
-            return "redirect:/equipe/home";
+            return "redirect:/home";
         }
         else {
             model.addAttribute("message", "Equipe absente de la base de données");

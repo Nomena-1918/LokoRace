@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/main_layout}" lang="fr">
+    <body>
+        <!-- BODY -->
+        <div layout:fragment="content" class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Bienvenue !</h1>
+                </div>
+                <div class="card-body">
+                    <div class="breadcrumb-item" th:switch="${session.user.getClass().getSimpleName()}">
+                        <p th:case="Admin">
+                            Admin : <span class="fw-bold" th:text="${(session.user).email}">Username</span>
+                        </p>
+                        <p th:case="Equipe">
+                            Equipe : <span class="fw-bold" th:text="${(session.user).nom}">Username</span>
+                        </p>
+                        <div th:case="*">
+                            <!-- HTML elements to render if session.user is neither a Admin nor an Equipe -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- -->
+    </body>
+</html>
