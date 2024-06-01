@@ -9,9 +9,4 @@ public class HomeController {
     public String index() {
         return "redirect:/login-equipe";
     }
-
-    @GetMapping("/home")
-    public String home() {
-        return "pages/home";
-    }
 }
