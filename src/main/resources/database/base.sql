@@ -76,7 +76,7 @@ create table coureur_etapes
     id_etape          integer not null,
     dateheure_depart  timestamp,
     dateheure_arrivee timestamp check ( dateheure_arrivee > dateheure_depart ),
-    duree_penalite    interval check ( duree_penalite >= '00:00:00'::interval ) default '00:00:00'::interval,
+    duree_penalite    interval not null check ( duree_penalite >= '00:00:00'::interval ) default '00:00:00'::interval,
     foreign key (id_coureur) references coureurs (id),
     foreign key (id_etape) references etapes (id),
     unique (id_coureur, id_etape)
