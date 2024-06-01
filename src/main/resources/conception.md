@@ -1,0 +1,2 @@
+- Course : Nom ,Date début ,Date fin , Liste des étapes, Liste des équipes
+- Etape : Nom , 
