@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EquipeController {
 
     @GetMapping("/home")
-    public String home(Model model) {
-        model.addAttribute("pageTitle", "EQUIPE page");
-        model.addAttribute("subTitle", "Loko Race - Home page");
+    public String home() {
         return "pages/home";
     }
 
+    @GetMapping("/liste-etape")
+    public String listeEtape() {
+        return "pages/equipe/liste-etape";
+    }
 
 }

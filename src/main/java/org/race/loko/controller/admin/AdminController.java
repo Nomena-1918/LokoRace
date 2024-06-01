@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
     @GetMapping("/home")
-    public String home(Model model) {
-        model.addAttribute("pageTitle", "ADMIN page");
-        model.addAttribute("subTitle", "Loko Race - Home page");
+    public String home() {
         return "pages/home";
     }
 }
