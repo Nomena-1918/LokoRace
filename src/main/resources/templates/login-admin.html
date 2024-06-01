@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mazer Admin Dashboard</title>
+    <title>Login admin</title>
     <link rel="shortcut icon" href="../static/assets/compiled/svg/favicon.svg"
           th:href="@{/assets/compiled/svg/favicon.svg}" type="image/x-icon">
     <link rel="shortcut icon"
@@ -28,17 +28,17 @@
         <div class="col-lg-5 col-12">
             <div id="auth-left">
                 <div class="auth-logo">
-                    <p class="h3"><a href="/">BTP</a></p>
+                    <p class="h3"><a href="/">Loko Race</a></p>
                 </div>
                 <h1 class="auth-title">Log in</h1>
-                <p class="auth-subtitle mb-5">Log in - Admin BTP</p>
+                <p class="auth-subtitle mb-5">Log in - Admin</p>
 
                 <p th:text="${message}" class="text-danger"></p>
 
-                <form th:action="@{/submit-login-admin}" th:object="${adminBtp}" method="post">
+                <form th:action="@{/submit-login-admin}" th:object="${admin}" method="post">
                     <div class="form-group position-relative has-icon-left mb-4">
 
-                        <input th:field="*{nom}" type="text" class="form-control form-control-xl" placeholder="Username">
+                        <input th:field="*{email}" type="text" class="form-control form-control-xl" placeholder="Username">
 
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
@@ -55,8 +55,8 @@
 
                 <p class="link-offset-2-hover py-3">
                     <a href="/login-client"
-                       th:href="@{/login-client}">
-                        Login client ?
+                       th:href="@{/login-equipe}">
+                        Login équipe ?
                     </a>
                 </p>
 
@@ -64,7 +64,6 @@
         </div>
         <div class="col-lg-7 d-none d-lg-block">
             <div id="auth-right">
-
 
             </div>
         </div>

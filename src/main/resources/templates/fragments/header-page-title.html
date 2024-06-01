@@ -8,7 +8,7 @@
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/" th:href="@{/}">Home</a></li>
-                    <li class="breadcrumb-item"><span th:text="${session.user}">Username</span></li>
+                    <li class="breadcrumb-item"><span th:text="${(session.user).email}">Username</span></li>
                     <li class="breadcrumb-item"><a href="/" th:href="@{/logout}">Log out</a></li>
                 </ol>
             </nav>
