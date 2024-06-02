@@ -8,7 +8,7 @@
 <div layout:fragment="content" class="container">
     <div class="card">
         <div class="card-header">
-            <h1 class="card-title">Etapes de la course : <span th:text="${course.nom}"></span></h1>
+            <h1 class="card-title">Etapes de la course : <span th:class="h2" th:text="${course.nom}"></span></h1>
         </div>
         <p th:text="${error}" class="text-danger py-2"></p>
         <div class="card-body">
@@ -27,8 +27,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="etape, iterStat : ${listeEtapes}">
-                        <!--<td th:text="${iterStat.count}"></td>-->
-                        <td th:text="${etape.id}"></td>
+                        <td th:text="${iterStat.count}"></td>
                         <td th:text="${etape.nom}"></td>
                         <td th:text="${etape.distanceKm}"></td>
                         <td th:text="${etape.getDateHeureDebutStr()}"></td>
@@ -64,7 +63,7 @@
                                                                         class="form-control">
                                                                     <option th:each="coureur : ${listeCoureurs}"
                                                                             th:value="${coureur.id}"
-                                                                            th:text="${coureur.nom + ' ' + coureur.prenom}"></option>
+                                                                            th:text="${coureur.getNumeroDossard() + ' : '+ coureur.nom + ' ' + coureur.prenom}"></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -114,13 +113,14 @@
                                                                         th:field="*{idCoureur}" class="form-control">
                                                                     <option th:each="coureurEtape : ${etape.getCoureursEtape()}"
                                                                             th:value="${coureurEtape.coureur.id}"
-                                                                            th:text="${coureurEtape.coureur.getEquipe().getNom() +' : '+ coureurEtape.coureur.nom + ' ' + coureurEtape.coureur.prenom}"></option>
+                                                                            th:text="${coureurEtape.coureur.getEquipe().getNom() +' - '+ coureurEtape.coureur.getNumeroDossard() + ' : ' + coureurEtape.coureur.nom + ' ' + coureurEtape.coureur.prenom}"></option>
                                                                 </select>
                                                             </div>
 
                                                             <div class="form-group p-2">
                                                                 <label class="col-form-label">Départ : </label>
-                                                                <input type="datetime-local" step="1" class="form-control"
+                                                                <input type="datetime-local" step="1"
+                                                                       class="form-control"
                                                                        th:value="${etape.dateHeureDebut.toString()}"
                                                                        th:field="*{dateHeureDepart}"/>
                                                             </div>

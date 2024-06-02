@@ -15,6 +15,7 @@ ORDER BY id_etape, dateheure_arrivee;
 -- VUE POUR AVOIR LES RANGS DES COUREURS EN FONCTION DE LEUR RANG
 create or replace view v_classement_etape as
 select
+    row_number() over () as id,
     rce.id as id_rang_coureur_etape,
     id_etape,
     id_coureur,

@@ -1,8 +1,10 @@
 package org.race.loko.controllers.business;
 
 import org.race.loko.models.CoureurEtapeForm;
+import org.race.loko.models.business.ClassementCoureurEtape;
 import org.race.loko.models.business.Coureur;
 import org.race.loko.models.profil.Equipe;
+import org.race.loko.repositories.business.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.business.CoureurRepository;
 import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.repositories.business.EtapeRepository;
@@ -23,12 +25,15 @@ public class UserController {
     private final CourseRepository courseRepository;
     private final EtapeRepository etapeRepository;
     private final CoureurRepository coureurRepository;
+    private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
+
 
     @Autowired
-    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository) {
+    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository) {
         this.courseRepository = courseRepository;
         this.etapeRepository = etapeRepository;
         this.coureurRepository = coureurRepository;
+        this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
     }
 
     @GetMapping("/home")
@@ -56,6 +61,17 @@ public class UserController {
         model.addAttribute("coureurEtapeForm", new CoureurEtapeForm());
 
         return "pages/etape/liste-etape";
+    }
+
+    @GetMapping("/classement-general-individuel")
+    public String classementGeneralIndividuel(Model model) {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementCoureurEtapeRepository.findByCourseId(course.getId());
+
+        model.addAttribute("course", course);
+        model.addAttribute("classements", classements);
+
+        return "pages/classement/classement-general-individuel";
     }
 
 
