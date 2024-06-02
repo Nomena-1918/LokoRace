@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.StringJoiner;
+
 @Setter
 @Getter
 @Entity
@@ -22,4 +24,13 @@ public class Equipe {
     @Column(name = "mot_de_passe", nullable = false, unique = true)
     public String mdp;
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Equipe.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("nom='" + nom + "'")
+                .add("email='" + email + "'")
+                .add("mdp='" + mdp + "'")
+                .toString();
+    }
 }

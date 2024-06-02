@@ -1,6 +1,6 @@
-package org.race.loko.repositories.business;
+package org.race.loko.repositories.business.views;
 
-import org.race.loko.models.business.ClassementCoureurEtape;
+import org.race.loko.models.business.views.ClassementCoureurEtape;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

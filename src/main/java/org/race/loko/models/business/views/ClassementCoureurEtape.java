@@ -1,9 +1,11 @@
-package org.race.loko.models.business;
+package org.race.loko.models.business.views;
 
 import groovy.transform.Immutable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.race.loko.models.business.CoureurEtape;
+import org.race.loko.models.business.Course;
 
 @Getter
 @Setter
