@@ -4,10 +4,10 @@ VALUES ('ULTIMATE TEAM RACE', '2024-06-01', '2024-06-02');
 INSERT INTO etapes (nom, distance_km, dateheure_debut, rang_etape, nombre_coureur_equipe, id_course)
 VALUES ('Étape 1', 18.0, '2024-06-01 10:00:00', 1, 1, 1),
        ('Étape 2', 19.0, '2024-06-02 10:00:00', 2, 2, 1);
-
+/*
 INSERT INTO admin (email, mot_de_passe)
 VALUES ('admin@ultimateteamrace.com', 'adminpassword');
-
+*/
 INSERT INTO genres (nom)
 VALUES ('Homme'),
        ('Femme');

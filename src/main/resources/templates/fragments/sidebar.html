@@ -32,47 +32,32 @@
         </div>
 
 
-        <div th:switch="${session.user.getClass().getSimpleName()}">
-            <div th:case="Equipe">
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-                        <li
-                                class="sidebar-item  ">
-                            <a th:href="@{/equipe/liste-etape}" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-steps"></i>
-                                <span>Liste des étapes</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div th:case="Admin">
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-                        <li
-                                class="sidebar-item  ">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-steps"></i>
-                                <span>Classement général par étape</span>
-                            </a>
-                        </li>
-                        <li
-                                class="sidebar-item  ">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-star-fill"></i>
-                                <span>Classement général par équipe</span>
-                            </a>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+                <li
+                        class="sidebar-item  ">
+                    <a th:href="@{/user/liste-etape}" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-steps"></i>
+                        <span>Liste des étapes</span>
+                    </a>
+                </li>
+                <li
+                        class="sidebar-item  ">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-steps"></i>
+                        <span>Classement général par étape</span>
+                    </a>
+                </li>
+                <li
+                        class="sidebar-item  ">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-star-fill"></i>
+                        <span>Classement général par équipe</span>
+                    </a>
 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div th:case="*">
-                <!-- HTML elements to render if session.user is neither a Client nor an AdminBtp -->
-            </div>
+                </li>
+            </ul>
         </div>
-
     </div>
 </div>

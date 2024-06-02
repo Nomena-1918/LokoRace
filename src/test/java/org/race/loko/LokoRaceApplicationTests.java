@@ -22,6 +22,8 @@ class LokoRaceApplicationTests {
     void listeEtapes() {
         var course = courseRepository.findLatestCourse();
         var listeEtapes = etapeRepository.findByCourseId(course.getId());
+
+
         System.out.println("\n\n"+listeEtapes+"\n\n");
     }
 

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}" lang="fr">
+<head>
+    <title>Liste des étapes</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Etapes de la course : <span th:text="${course.nom}"></span></h1>
+        </div>
+        <p th:text="${error}" class="text-danger py-2"></p>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Distance (km)</th>
+                        <th scope="col">Date et heure de début</th>
+                        <th scope="col">Rang</th>
+                        <th scope="col">Coureurs par équipe</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="etape, iterStat : ${listeEtapes}">
+                        <!--<td th:text="${iterStat.count}"></td>-->
+                        <td th:text="${etape.id}"></td>
+                        <td th:text="${etape.nom}"></td>
+                        <td th:text="${etape.distanceKm}"></td>
+                        <td th:text="${etape.getDateHeureDebutStr()}"></td>
+                        <td th:text="${etape.rangEtape}"></td>
+                        <td th:text="${etape.nombreCoureurEquipe}"></td>
+                        <td style="display:flex">
+                            <div th:switch="${session.user.getClass().getSimpleName()}">
+                                <div th:case="Equipe">
+                                    <div class="px-2">
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                th:attr="data-bs-target=${'#affecterCoureurModal_' + etape.id}">
+                                            Affecter coureur
+                                        </button>
+                                        <!-- Modal pour affecter un coureur -->
+                                        <div class="modal fade text-left" th:id="${'affecterCoureurModal_' + etape.id}"
+                                             tabindex="-1"
+                                             role="dialog"
+                                             aria-labelledby="affecterCoureurModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                 role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="affecterCoureurModalLabel">Affecter
+                                                            un
+                                                            coureur</h4>
+                                                    </div>
+                                                    <form th:action="@{/equipe/affecter-coureur}" method="post">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="idEtape" th:value="${etape.id}">
+                                                            <label for="coureur">Coureur: </label>
+                                                            <div class="form-group">
+                                                                <select id="coureur" name="idCoureur"
+                                                                        class="form-control">
+                                                                    <option th:each="coureur : ${listeCoureurs}"
+                                                                            th:value="${coureur.id}"
+                                                                            th:text="${coureur.nom + ' ' + coureur.prenom}"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-light-secondary"
+                                                                    data-bs-dismiss="modal">Fermer
+                                                            </button>
+                                                            <button type="submit" class="btn btn-outline-primary ms-1">
+                                                                Affecter
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:case="Admin">
+                                    <div class="px-2">
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                th:attr="data-bs-target=${'#affecterTempsCoureurModal_' + etape.id}">
+                                            Affecter temps coureurs
+                                        </button>
+                                        <!-- Modal pour affecter un coureur -->
+                                        <div class="modal fade text-left"
+                                             th:id="${'affecterTempsCoureurModal_' + etape.id}" tabindex="-1"
+                                             role="dialog"
+                                             aria-labelledby="affecterCoureurModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                 role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="affecterTempsCoureurModalLabel">
+                                                            Affecter un
+                                                            coureur</h4>
+                                                    </div>
+                                                    <form th:action="@{/admin/affecter-temps-coureur}" method="post"
+                                                          th:object="${coureurEtapeForm}">
+                                                        <div class="modal-body">
+                                                            <input type="hidden"
+                                                                   name="idEtape" th:value="${etape.id}">
+
+                                                            <div class="form-group">
+                                                                <label for="coureur">Coureur: </label>
+                                                                <select id="coureurTemps" name="idCoureur"
+                                                                        th:field="*{idCoureur}" class="form-control">
+                                                                    <option th:each="coureurEtape : ${etape.getCoureursEtape()}"
+                                                                            th:value="${coureurEtape.coureur.id}"
+                                                                            th:text="${coureurEtape.coureur.getEquipe().getNom() +' : '+ coureurEtape.coureur.nom + ' ' + coureurEtape.coureur.prenom}"></option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group p-2">
+                                                                <label class="col-form-label">Départ : </label>
+                                                                <input type="datetime-local" step="1" class="form-control"
+                                                                       th:value="${etape.dateHeureDebut.toString()}"
+                                                                       th:field="*{dateHeureDepart}"/>
+                                                            </div>
+
+                                                            <div class="form-group p-2">
+                                                                <label class="col-form-label">Arrivée : </label>
+                                                                <input type="datetime-local" step="1"
+                                                                       class="form-control"
+                                                                       th:field="*{dateHeureArrivee}"/>
+                                                            </div>
+
+                                                            <!--
+                                                            <div class="form-group p-2">
+                                                                <label class="col-form-label">Pénalité : </label>
+                                                                <input type="datetime-local" class="form-control" th:field="*{dureePenalite}" />
+                                                            </div>
+                                                            -->
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-light-secondary"
+                                                                    data-bs-dismiss="modal">Fermer
+                                                            </button>
+                                                            <button type="submit" class="btn btn-outline-primary ms-1">
+                                                                Affecter
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:case="*">
+                                    <!-- HTML elements to render if session.user is neither a Client nor an AdminBtp -->
+                                </div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

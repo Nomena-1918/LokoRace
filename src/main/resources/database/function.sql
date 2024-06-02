@@ -8,11 +8,11 @@ begin
          from coureur_etapes ce
                   join coureurs c on ce.id_coureur = c.id
          where c.id_equipe = (select id_equipe from coureurs where id = NEW.id_coureur)
-           and ce.id_etape = NEW.id_etape)
+           and ce.id_etape = NEW.id_etape) + 1
             >
         (select nombre_coureur_equipe from etapes where id = NEW.id_etape)
     then
-        raise exception 'Le nombre de coureur par équipe est dépassé';
+        raise exception 'Le nombre de coureurs par équipe est dépassé';
     end if;
     return NEW;
 end;

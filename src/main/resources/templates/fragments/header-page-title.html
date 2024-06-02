@@ -17,15 +17,9 @@
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item" th:switch="${session.user.getClass().getSimpleName()}">
-                        <a th:case="Admin" href="/" th:href="@{/home}">
-                            Home Admin
-                        </a>
-                        <a th:case="Equipe" href="/" th:href="@{/home}">
-                            Home Equipe
-                        </a>
-                        <a th:case="*">
-                            <!-- HTML elements to render if session.user is neither a Admin nor an Equipe -->
+                    <li class="breadcrumb-item">
+                        <a href="/" th:href="@{/user/home}">
+                            Home
                         </a>
                     </li>
                     <li class="breadcrumb-item"><span th:text="${(session.user).email}">Username</span></li>
