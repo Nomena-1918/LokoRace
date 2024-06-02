@@ -12,4 +12,7 @@ public interface ClassementCoureurEtapeRepository extends JpaRepository<Classeme
 
     @Query(value = "select c from ClassementCoureurEtape c where c.coureurEtape.etape.course.id = ?1")
     List<ClassementCoureurEtape> findByCourseId(Long courseId);
+
+
+
 }

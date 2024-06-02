@@ -13,20 +13,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private final CourseRepository courseRepository;
-    private final EtapeRepository etapeRepository;
-    private final CoureurRepository coureurRepository;
     private final CoureurEtapeRepository coureurEtapeRepository;
 
 
     @Autowired
-    public AdminController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, CoureurEtapeRepository coureurEtapeRepository) {
-        this.courseRepository = courseRepository;
-        this.etapeRepository = etapeRepository;
-        this.coureurRepository = coureurRepository;
+    public AdminController(CoureurEtapeRepository coureurEtapeRepository) {
         this.coureurEtapeRepository = coureurEtapeRepository;
     }
 
@@ -46,8 +43,11 @@ public class AdminController {
                 return "redirect:/user/liste-etape";
             }
 
+            // Convert LocalTime to Duration
+            Duration dureeCourse = Duration.between(LocalTime.MIDNIGHT, coureurEtapeForm.getTemps());
+
             coureurEtape.setDateHeureDepart(coureurEtapeForm.getDateHeureDepart());
-            coureurEtape.setDateHeureArrivee(coureurEtapeForm.getDateHeureArrivee());
+            coureurEtape.setDateHeureArrivee(coureurEtapeForm.getDateHeureDepart().plus(dureeCourse));
             //coureurEtape.setDureePenalite(coureurEtapeForm.getDureePenalite());
 
             coureurEtapeRepository.save(coureurEtape);
