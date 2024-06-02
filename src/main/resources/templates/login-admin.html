@@ -19,10 +19,37 @@
     <link rel="stylesheet" href="../static/assets/compiled/css/auth.css"
           th:href="@{/assets/compiled/css/auth.css}">
 
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .row.h-100 {
+            height: 100vh;
+        }
+
+        #auth-right {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #auth-right img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
 <script src="../static/assets/static/js/initTheme.js" th:src="@{/assets/static/js/initTheme.js}"></script>
+
 <div id="auth">
     <div class="row h-100">
         <div class="col-lg-5 col-12">
@@ -38,14 +65,16 @@
                 <form th:action="@{/submit-login-admin}" th:object="${admin}" method="post">
                     <div class="form-group position-relative has-icon-left mb-4">
 
-                        <input th:field="*{email}" type="text" class="form-control form-control-xl" placeholder="Username">
+                        <input th:field="*{email}" type="text" class="form-control form-control-xl"
+                               placeholder="Username">
 
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>
                     </div>
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input th:field="*{mdp}" type="password" class="form-control form-control-xl" placeholder="Password">
+                        <input th:field="*{mdp}" type="password" class="form-control form-control-xl"
+                               placeholder="Password">
                         <div class="form-control-icon">
                             <i class="bi bi-shield-lock"></i>
                         </div>
@@ -63,8 +92,10 @@
             </div>
         </div>
         <div class="col-lg-7 d-none d-lg-block">
-            <div id="auth-right">
-
+            <div class="row h-100 w-500">
+                <div id="auth-right">
+                    <img class="img" th:src="@{/assets/static/images/admin.jpg}" src="/assets/static/images/equipe.jpg" alt="Loko Race Image">
+                </div>
             </div>
         </div>
     </div>
