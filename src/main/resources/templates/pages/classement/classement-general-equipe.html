@@ -17,24 +17,15 @@
                 <table class="table mb-0">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th scope="col">Etape</th>
                         <th scope="col">Rang</th>
                         <th scope="col">Equipe</th>
-                        <th scope="col">Départ</th>
-                        <th scope="col">Arrivée</th>
                         <th scope="col">Points</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item, iterStat : ${classements}">
-                        <td th:text="${iterStat.count}"></td>
-                        <td th:text="${item.coureurEtape.etape.nom}"></td>
-                        <td th:text="${item.rangCoureur}"></td>
-                        <td th:text="${item.coureurEtape.coureur.equipe.nom}"></td>
-                        <td th:text="${item.coureurEtape.coureur.getNumeroDossard() + ' : '+ item.coureurEtape.coureur.nom +' '+ item.coureurEtape.coureur.prenom}"></td>
-                        <td th:text="${T(org.race.loko.utils.DateTimeUtils).formatFR(item.coureurEtape.dateHeureDepart)}"></td>
-                        <td th:text="${T(org.race.loko.utils.DateTimeUtils).formatFR(item.coureurEtape.dateHeureArrivee)}"></td>
+                    <tr th:each="item : ${classements}">
+                        <td th:text="${item.rangEquipe}"></td>
+                        <td th:text="${item.equipe.nom}"></td>
                         <td th:text="${item.points}"></td>
                     </tr>
                     </tbody>

@@ -7,6 +7,7 @@ import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepositor
 import org.race.loko.repositories.business.CoureurRepository;
 import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.repositories.business.EtapeRepository;
+import org.race.loko.repositories.business.views.ClassementEquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,14 +26,16 @@ public class UserController {
     private final EtapeRepository etapeRepository;
     private final CoureurRepository coureurRepository;
     private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
+    private final ClassementEquipeRepository classementEquipeRepository;
 
 
     @Autowired
-    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository) {
+    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository) {
         this.courseRepository = courseRepository;
         this.etapeRepository = etapeRepository;
         this.coureurRepository = coureurRepository;
         this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
+        this.classementEquipeRepository = classementEquipeRepository;
     }
 
     @GetMapping("/home")
@@ -71,6 +74,17 @@ public class UserController {
         model.addAttribute("classements", classements);
 
         return "pages/classement/classement-general-individuel";
+    }
+
+    @GetMapping("/classement-general-equipe")
+    public String classementGeneralEquipe(Model model) {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementEquipeRepository.findByCourseId(course.getId());
+
+        model.addAttribute("course", course);
+        model.addAttribute("classements", classements);
+
+        return "pages/classement/classement-general-equipe";
     }
 
 

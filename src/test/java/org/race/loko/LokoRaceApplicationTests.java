@@ -14,7 +14,6 @@ class LokoRaceApplicationTests {
     private final CourseRepository courseRepository;
     private final EtapeRepository etapeRepository;
     private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
-
     private final ClassementEquipeRepository classementEquipeRepository;
     @Autowired
     public LokoRaceApplicationTests(CourseRepository courseRepository, EtapeRepository etapeRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository) {
