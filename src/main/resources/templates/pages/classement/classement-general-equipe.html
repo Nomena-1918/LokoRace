@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}" lang="fr">
+<head>
+    <title>Liste des étapes</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Classement général individuel : <span th:class="h2" th:text="${course.nom}"></span>
+            </h1>
+        </div>
+        <p th:text="${error}" class="text-danger py-2"></p>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th scope="col">Etape</th>
+                        <th scope="col">Rang</th>
+                        <th scope="col">Equipe</th>
+                        <th scope="col">Départ</th>
+                        <th scope="col">Arrivée</th>
+                        <th scope="col">Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${classements}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${item.coureurEtape.etape.nom}"></td>
+                        <td th:text="${item.rangCoureur}"></td>
+                        <td th:text="${item.coureurEtape.coureur.equipe.nom}"></td>
+                        <td th:text="${item.coureurEtape.coureur.getNumeroDossard() + ' : '+ item.coureurEtape.coureur.nom +' '+ item.coureurEtape.coureur.prenom}"></td>
+                        <td th:text="${T(org.race.loko.utils.DateTimeUtils).formatFR(item.coureurEtape.dateHeureDepart)}"></td>
+                        <td th:text="${T(org.race.loko.utils.DateTimeUtils).formatFR(item.coureurEtape.dateHeureArrivee)}"></td>
+                        <td th:text="${item.points}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

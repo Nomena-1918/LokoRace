@@ -15,6 +15,10 @@ public class ClassementCoureurEtape {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "id_course", nullable = false)
+    private Course course;
+
+    @ManyToOne
     @JoinColumn(name = "id_rang_coureur_etape", nullable = false)
     private CoureurEtape coureurEtape;
 
