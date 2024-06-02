@@ -53,7 +53,7 @@ SELECT ROW_NUMBER() OVER ()                          AS id,
        id_course,
        id_equipe,
        SUM(points)                                   AS points,
-       ROW_NUMBER() OVER (ORDER BY SUM(points) DESC) AS rang_equipe
+       RANK() OVER (ORDER BY SUM(points) DESC) AS rang_equipe
 FROM (SELECT vce.id_course,
              vce.id_etape,
              c.id_equipe,
