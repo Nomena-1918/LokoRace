@@ -33,31 +33,106 @@
 
 
         <div class="sidebar-menu">
-            <ul class="menu">
-                <li class="sidebar-title">Menu</li>
-                <li
-                        class="sidebar-item  ">
-                    <a th:href="@{/user/liste-etape}" class='sidebar-link'>
-                        <i class="bi bi-bar-chart-steps"></i>
-                        <span>Liste des étapes</span>
-                    </a>
-                </li>
-                <li
-                        class="sidebar-item  ">
-                    <a th:href="@{/user/classement-general-individuel}" class='sidebar-link'>
-                        <i class="bi bi-star-fill"></i>
-                        <span>Classement général individuel</span>
-                    </a>
-                </li>
-                <li
-                        class="sidebar-item  ">
-                    <a th:href="@{/user/classement-general-equipe}" class='sidebar-link'>
-                        <i class="bi bi-trophy"></i>
-                        <span>Classement général par équipe</span>
-                    </a>
+            <div th:switch="${session.user.getClass().getSimpleName()}">
 
-                </li>
-            </ul>
+
+                <ul th:case="Admin" class="menu">
+                    <li class="sidebar-title">Menu</li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/liste-etape}" class='sidebar-link'>
+                            <i class="bi bi-bar-chart-steps"></i>
+                            <span>Liste des étapes</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/classement-general-individuel}" class='sidebar-link'>
+                            <i class="bi bi-star-fill"></i>
+                            <span>Classement général individuel</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/classement-general-equipe}" class='sidebar-link'>
+                            <i class="bi bi-trophy"></i>
+                            <span>Classement général par équipe</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/admin/import-data}" class='sidebar-link'>
+                            <i class="bi bi-database-add"></i>
+                            <span>Import de données</span>
+                        </a>
+                    </li>
+
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/admin/import-points}" class='sidebar-link'>
+                            <i class="bi bi-database"></i>
+                            <span>Import configuration points</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+
+                <ul th:case="Equipe" class="menu">
+                    <li class="sidebar-title">Menu</li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/liste-etape}" class='sidebar-link'>
+                            <i class="bi bi-bar-chart-steps"></i>
+                            <span>Liste des étapes</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/classement-general-individuel}" class='sidebar-link'>
+                            <i class="bi bi-star-fill"></i>
+                            <span>Classement général individuel</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/classement-general-equipe}" class='sidebar-link'>
+                            <i class="bi bi-trophy"></i>
+                            <span>Classement général par équipe</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+                <ul th:case="*" class="menu">
+                    <li class="sidebar-title">Menu</li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/liste-etape}" class='sidebar-link'>
+                            <i class="bi bi-bar-chart-steps"></i>
+                            <span>Liste des étapes</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/classement-general-individuel}" class='sidebar-link'>
+                            <i class="bi bi-star-fill"></i>
+                            <span>Classement général individuel</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a th:href="@{/user/classement-general-equipe}" class='sidebar-link'>
+                            <i class="bi bi-trophy"></i>
+                            <span>Classement général par équipe</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+
     </div>
 </div>

@@ -50,7 +50,8 @@ create table coureurs
     id_equipe      integer      not null,
     foreign key (id_genre) references genres (id),
     foreign key (id_equipe) references equipes (id),
-    unique (nom, prenom, date_naissance, id_genre, id_equipe)
+    unique (nom, prenom, date_naissance, id_genre, id_equipe),
+    unique(numero_dossard)
 );
 
 create table categories

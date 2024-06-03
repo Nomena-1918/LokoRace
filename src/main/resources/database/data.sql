@@ -19,8 +19,8 @@ VALUES ('Homme'),
        ('Senior');
 
 INSERT INTO equipes (nom, email, mot_de_passe)
-VALUES ('Équipe A', 'equipea@ultimateteamrace.com', 'equipepasswordA'),
-       ('Équipe B', 'equipeb@ultimateteamrace.com', 'equipepasswordB');
+VALUES ('Équipe A', 'equipea@race.com', 'equipea'),
+       ('Équipe B', 'equipeb@race.com', 'equipeb');
 
 INSERT INTO coureurs (nom, prenom, numero_dossard, date_naissance, id_genre, id_equipe)
 VALUES ('Razafindrakoto', 'Haja', 101, '1998-07-15', 1, 1),

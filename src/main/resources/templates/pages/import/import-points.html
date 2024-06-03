@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/main_layout}" lang="fr">
+<body>
+<!-- BODY -->
+<div layout:fragment="content" class="container">
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Import de la configuration des points</h1>
+        </div>
+        <div class="card-body">
+            <form class="form" action="#" th:action="@{/admin/import-points}" method="post"
+                  enctype="multipart/form-data">
+                <div class="form-group p-2">
+                    <label class="col-form-label"> Points </label>
+                    <input type="file" class="form-control" name="points"/>
+                </div>
+                <p style="color: white;"><span th:text="${message}"></span></p>
+                <div class="form-group p-2 col-2">
+                    <button type="submit" class="btn btn-primary py-1 w-100 mb-4">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- -->
+</body>
+</html>
