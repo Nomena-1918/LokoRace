@@ -22,23 +22,44 @@ INSERT INTO equipes (nom, email, mot_de_passe)
 VALUES ('Équipe A', 'equipea@race.com', 'equipea'),
        ('Équipe B', 'equipeb@race.com', 'equipeb');
 
+
+
 INSERT INTO coureurs (nom, prenom, numero_dossard, date_naissance, id_genre, id_equipe)
 VALUES ('Razafindrakoto', 'Haja', 101, '1998-07-15', 1, 1),
        ('Rasolofoniaina', 'Tahiry', 102, '2001-02-22', 1, 1),
        ('Rakotoarisoa', 'Feno', 201, '1996-05-10', 2, 2),
        ('Rajaonarivelo', 'Fanja', 202, '1990-12-19', 2, 2);
 
+
+-- Insertion des données de paramétrage
+INSERT INTO parametrage_categorie (id_categorie, id_genre, tranche_age)
+VALUES
+    (3, 1, '[0,18]'),   -- Junior Homme
+    (3, 2, '[0,18]'),   -- Junior Femme
+    (4, 1, '[18,200]'), -- Senior Homme
+    (4, 2, '[18,200]'); -- Senior Femme
+
+
+-- Attribuer les catégories aux coureurs en fonction de l'âge calculé
+INSERT INTO coureur_categories (id_coureur, id_categorie)
+SELECT c.id, p.id_categorie
+FROM coureurs c
+         JOIN parametrage_categorie p
+              ON c.id_genre = p.id_genre
+                  AND (EXTRACT(YEAR FROM AGE(CURRENT_DATE, c.date_naissance))::int <@ p.tranche_age);
+
+
+
+/*
 INSERT INTO coureur_categories (id_coureur, id_categorie)
 VALUES (1, 4), -- Haja Razafindrakoto en Senior
        (2, 3), -- Tahiry Rasolofoniaina en Junior
        (3, 4), -- Feno Rakotoarisoa en Senior
        (4, 4); -- Fanja Rajaonarivelo en Senior
+*/
 
-INSERT INTO coureur_categories (id_coureur, id_categorie)
-VALUES (1, 1), -- Haja Razafindrakoto en Homme
-       (2, 1), -- Tahiry Rasolofoniaina en Homme
-       (3, 2), -- Feno Rakotoarisoa en Femme
-       (4, 2); -- Fanja Rajaonarivelo en Femme
+--select EXTRACT(YEAR FROM AGE(CURRENT_DATE, '2004-06-01 10:00:00'));
+
 
 
 INSERT INTO coureur_etapes (id_coureur, id_etape, dateheure_depart, dateheure_arrivee, duree_penalite)

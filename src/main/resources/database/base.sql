@@ -89,3 +89,19 @@ create table point_classements
     rang   int unique not null check ( rang > 0 ),
     points int unique not null check ( points >= 0 )
 );
+
+
+create table parametrage_categorie(
+    id serial primary key,
+    id_categorie int references categories(id),
+    id_genre int references genres(id),
+    tranche_age int4range
+);
+
+
+/*
+insert into parametrage_categorie(id_categorie, id_genre, tranche_age) values
+(1, 1, int4range(0, 18));
+
+select 19 <@ tranche_age from parametrage_categorie;
+*/

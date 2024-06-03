@@ -1,16 +1,21 @@
 -- VUE POUR AVOIR LES RANGS DES COUREURS PAR ETAPE
 CREATE OR REPLACE VIEW v_rang_coureur_etape AS
+    --test
 SELECT ce.id,
        e.id_course,
        id_coureur,
+       c2.nom,
+       e2.nom,
        id_etape,
        dateheure_depart,
        dateheure_arrivee,
        duree_penalite,
        (COALESCE(dateheure_arrivee, NOW()) - dateheure_depart + duree_penalite)          AS duree_course,
-       RANK() OVER (PARTITION BY id_etape ORDER BY (dateheure_arrivee + duree_penalite)) AS rang_coureur
+       dense_rank() OVER (PARTITION BY id_etape ORDER BY (dateheure_arrivee + duree_penalite)) AS rang_coureur
 FROM coureur_etapes ce
-         join etapes e on e.id = id_etape
+        join etapes e on e.id = id_etape
+        join coureurs c2 on c2.id = ce.id_coureur
+        join public.equipes e2 on c2.id_equipe = e2.id
 ORDER BY id_etape, dateheure_arrivee;
 
 
@@ -22,10 +27,14 @@ select row_number() over () as id,
        rce.id               as id_rang_coureur_etape,
        id_etape,
        id_coureur,
+       c2.nom,
+       e2.nom,
        rang_coureur,
        coalesce(points, 0)  as points
 from v_rang_coureur_etape rce
          left join point_classements pc on rang_coureur = pc.rang
+         join coureurs c2 on c2.id = rce.id_coureur
+         join public.equipes e2 on c2.id_equipe = e2.id
 order by id_etape, rang_coureur;
 
 
@@ -36,7 +45,7 @@ select row_number() over ()                    as id,
        id_course,
        id_equipe,
        sum(points)                             as points,
-       RANK() over (order by sum(points) desc) as rang_equipe
+       dense_rank() over (order by sum(points) desc) as rang_equipe
 from v_classement_etape
          join coureurs c on v_classement_etape.id_coureur = c.id
 group by id_course, id_equipe
@@ -68,5 +77,8 @@ FROM (SELECT vce.id_course,
 WHERE nb_coureurs_inscrits = nb_coureurs_requis
 GROUP BY id_course, id_equipe
 ORDER BY rang_equipe;*/
+
+
+
 
 
