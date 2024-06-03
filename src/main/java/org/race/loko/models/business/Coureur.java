@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.race.loko.models.profil.Equipe;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Setter
 @Getter
@@ -36,6 +37,9 @@ public class Coureur {
     @ManyToOne
     @JoinColumn(name = "id_equipe", nullable = false)
     private Equipe equipe;
+
+    @OneToMany(mappedBy = "coureur", fetch = FetchType.EAGER)
+    private List<CoureurCategorie> coureurCategories;
 
     public Coureur setId(Long id) {
         this.id = id;

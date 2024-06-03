@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/main_layout}" lang="fr">
+<body>
+<!-- BODY -->
+<div layout:fragment="content" class="container">
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Import de la configuration des points</h1>
+        </div>
+        <div class="card-body">
+            <form class="form" action="#" th:action="@{/admin/assign-categ-coureur}" method="post">
+                <div class="form-group p-2 col-5">
+                    <button type="submit" class="btn btn-primary py-1 w-100 mb-4">Assigner catégories aux coureurs dynamiquement</button>
+                </div>
+            </form>
+            <div class="py-2">
+                <p th:text="${message}"></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- -->
+</body>
+</html>

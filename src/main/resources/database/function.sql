@@ -99,4 +99,35 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
-select reset_database();
+--select reset_database();
+
+/*
+-- Attribuer les catégories aux coureurs en fonction de l'âge calculé
+INSERT INTO coureur_categories (id_coureur, id_categorie)
+SELECT c.id, p.id_categorie
+FROM coureurs c
+         JOIN parametrage_categorie p
+              ON c.id_genre = p.id_genre
+                  AND (EXTRACT(YEAR FROM AGE(CURRENT_DATE, c.date_naissance))::int <@ p.tranche_age);
+*/
+CREATE OR REPLACE FUNCTION assign_categories_to_runners()
+    RETURNS void AS $$
+BEGIN
+    BEGIN
+        -- Attribuer les catégories aux coureurs en fonction de l'âge calculé
+        INSERT INTO coureur_categories (id_coureur, id_categorie)
+        SELECT c.id, p.id_categorie
+        FROM coureurs c
+                 JOIN parametrage_categorie p
+                      ON c.id_genre = coalesce(p.id_genre, c.id_genre)
+                          AND (EXTRACT(YEAR FROM AGE(CURRENT_DATE, c.date_naissance))::int <@ p.tranche_age);
+    EXCEPTION
+        WHEN OTHERS THEN
+            -- Lever une exception pour annuler la transaction
+            RAISE EXCEPTION 'An error occurred: %', SQLERRM;
+    END;
+END;
+$$ LANGUAGE plpgsql;
+
+
+select assign_categories_to_runners();

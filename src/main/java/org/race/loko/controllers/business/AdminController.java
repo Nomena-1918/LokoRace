@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.postgresql.util.PSQLException;
 import org.race.loko.models.CoureurEtapeForm;
 import org.race.loko.models.business.CoureurEtape;
+import org.race.loko.repositories.business.CoureurCategorieRepository;
 import org.race.loko.repositories.business.CoureurEtapeRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
@@ -31,13 +32,15 @@ public class AdminController {
     private final ImportEtapeService importEtapeService;
     private final ImportPointService importPointService;
     private final ImportResultatService importResultatService;
+    private final CoureurCategorieRepository coureurCategorieRepository;
 
     @Autowired
-    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService) {
+    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository) {
         this.coureurEtapeRepository = coureurEtapeRepository;
         this.importEtapeService = importEtapeService;
         this.importPointService = importPointService;
         this.importResultatService = importResultatService;
+        this.coureurCategorieRepository = coureurCategorieRepository;
     }
 
     @GetMapping("/home")
@@ -132,6 +135,29 @@ public class AdminController {
         model.addAttribute("message", pointMess);
 
         return "pages/import/import-points";
+    }
+
+    @GetMapping("/assign-categ-coureur")
+    public String assignCategCoureur() {
+        return "pages/import/assign-categ-coureur";
+    }
+
+    @Transactional
+    @PostMapping("/assign-categ-coureur")
+    public String assignCategCoureur(Model model) {
+        String message = null;
+        try {
+            coureurCategorieRepository.assignCategoriesToRunners();
+        }
+        catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message == null)
+            message = "Catégories affectées aux coureurs !";
+
+        model.addAttribute("message", message);
+
+        return "pages/import/assign-categ-coureur";
     }
 
 

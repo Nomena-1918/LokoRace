@@ -1,6 +1,8 @@
 package org.race.loko;
 
 import org.junit.jupiter.api.Test;
+import org.race.loko.repositories.business.CoureurCategorieRepository;
+import org.race.loko.repositories.business.CoureurRepository;
 import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.repositories.business.EtapeRepository;
@@ -15,12 +17,18 @@ class LokoRaceApplicationTests {
     private final EtapeRepository etapeRepository;
     private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
     private final ClassementEquipeRepository classementEquipeRepository;
+    private final CoureurCategorieRepository coureurCategorieRepository;
+    private final CoureurRepository coureurRepository;
+
+
     @Autowired
-    public LokoRaceApplicationTests(CourseRepository courseRepository, EtapeRepository etapeRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository) {
+    public LokoRaceApplicationTests(CourseRepository courseRepository, EtapeRepository etapeRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository, CoureurCategorieRepository coureurCategorieRepository, CoureurRepository coureurRepository, CoureurRepository coureurRepository1) {
         this.courseRepository = courseRepository;
         this.etapeRepository = etapeRepository;
         this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
         this.classementEquipeRepository = classementEquipeRepository;
+        this.coureurCategorieRepository = coureurCategorieRepository;
+        this.coureurRepository = coureurRepository1;
     }
 
     @Test
@@ -46,5 +54,21 @@ class LokoRaceApplicationTests {
 
         System.out.println("\n\n"+classements+"\n\n");
     }
+
+    @Test
+    void coureurCategorie() {
+        var coureurCategorie = coureurCategorieRepository.findAll();
+
+        System.out.println("\n\n"+coureurCategorie+"\n\n");
+    }
+
+    @Test
+    void coureur() {
+        var coureur = coureurRepository.findAll();
+
+        System.out.println("\n\n"+coureur+"\n\n");
+    }
+
+
 
 }

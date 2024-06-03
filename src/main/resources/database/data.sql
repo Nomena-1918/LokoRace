@@ -34,19 +34,15 @@ VALUES ('Razafindrakoto', 'Haja', 101, '1998-07-15', 1, 1),
 -- Insertion des données de paramétrage
 INSERT INTO parametrage_categorie (id_categorie, id_genre, tranche_age)
 VALUES
-    (3, 1, '[0,18]'),   -- Junior Homme
-    (3, 2, '[0,18]'),   -- Junior Femme
-    (4, 1, '[18,200]'), -- Senior Homme
-    (4, 2, '[18,200]'); -- Senior Femme
+    (1, 2, '[0,200]'), -- Homme
+    (2, 1, '[0,200]'), -- Femme
+
+    (3, null, '[0,19]'),   -- Junior
+    (4, null, '[19,200]'); -- Senior
 
 
--- Attribuer les catégories aux coureurs en fonction de l'âge calculé
-INSERT INTO coureur_categories (id_coureur, id_categorie)
-SELECT c.id, p.id_categorie
-FROM coureurs c
-         JOIN parametrage_categorie p
-              ON c.id_genre = p.id_genre
-                  AND (EXTRACT(YEAR FROM AGE(CURRENT_DATE, c.date_naissance))::int <@ p.tranche_age);
+
+
 
 
 

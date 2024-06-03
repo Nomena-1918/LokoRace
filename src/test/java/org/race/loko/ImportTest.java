@@ -1,6 +1,7 @@
 package org.race.loko;
 
 import org.junit.jupiter.api.Test;
+import org.race.loko.repositories.business.CoureurCategorieRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
 import org.race.loko.utils.csv.service.ImportResultatService;
@@ -52,7 +53,5 @@ public class ImportTest {
             System.out.println(s);
         System.out.println("\n\n");
     }
-
-
 
 }
