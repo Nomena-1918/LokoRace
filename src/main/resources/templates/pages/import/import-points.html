@@ -15,8 +15,11 @@
                     <label class="col-form-label"> Points </label>
                     <input type="file" class="form-control" name="points"/>
                 </div>
-                <p style="color: white;"><span th:text="${message}"></span></p>
-                <div class="form-group p-2 col-2">
+                <div>
+                    <ul>
+                        <li th:each="msg : ${message}" th:text="${msg}"></li>
+                    </ul>
+                </div>                <div class="form-group p-2 col-2">
                     <button type="submit" class="btn btn-primary py-1 w-100 mb-4">Valider</button>
                 </div>
             </form>

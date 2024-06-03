@@ -7,6 +7,7 @@ import org.race.loko.models.business.CoureurEtape;
 import org.race.loko.repositories.business.CoureurEtapeRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
+import org.race.loko.utils.csv.service.ImportResultatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,14 @@ public class AdminController {
     private final CoureurEtapeRepository coureurEtapeRepository;
     private final ImportEtapeService importEtapeService;
     private final ImportPointService importPointService;
+    private final ImportResultatService importResultatService;
 
     @Autowired
-    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService) {
+    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService) {
         this.coureurEtapeRepository = coureurEtapeRepository;
         this.importEtapeService = importEtapeService;
         this.importPointService = importPointService;
+        this.importResultatService = importResultatService;
     }
 
     @GetMapping("/home")
@@ -97,11 +100,11 @@ public class AdminController {
         try (FileOutputStream fos = new FileOutputStream(fileDataResultats)) {
             fos.write(bytes1);
         }
-        //List<String> l1 =  importDevisService.importDataFile(fileDataDevis);
+        List<String> resultatMess =  importResultatService.importDataFile(fileDataResultats);
 
 
         model.addAttribute("message", etapeMess);
-        //model.addAttribute("message1", l1);
+        model.addAttribute("message1", resultatMess);
 
         return "pages/import/import-data";
     }

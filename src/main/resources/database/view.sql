@@ -30,15 +30,13 @@ order by id_etape, rang_coureur;
 
 
 
-
- -- VUE POUR AVOIR LES RANGS DES EQUIPES : SOMME DES POINTS PAR COUREUR ET LEUR RANG EN FONCTION DE LA SOMME DES POINTS
+-- VUE POUR AVOIR LES RANGS DES EQUIPES : SOMME DES POINTS PAR COUREUR ET LEUR RANG EN FONCTION DE LA SOMME DES POINTS
 create or replace view v_classement_equipe as
-select
-    row_number() over () as id,
-    id_course,
-    id_equipe,
-    sum(points) as points,
-    RANK() over (order by sum(points) desc) as rang_equipe
+select row_number() over ()                    as id,
+       id_course,
+       id_equipe,
+       sum(points)                             as points,
+       RANK() over (order by sum(points) desc) as rang_equipe
 from v_classement_etape
          join coureurs c on v_classement_etape.id_coureur = c.id
 group by id_course, id_equipe

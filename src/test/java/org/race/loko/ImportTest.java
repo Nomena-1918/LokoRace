@@ -3,6 +3,7 @@ package org.race.loko;
 import org.junit.jupiter.api.Test;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
+import org.race.loko.utils.csv.service.ImportResultatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,10 +14,13 @@ import java.util.List;
 public class ImportTest {
     private final ImportEtapeService importEtapeService;
     private final ImportPointService importPointService;
+    private final ImportResultatService importResultatService;
+
     @Autowired
-    public ImportTest(ImportEtapeService importEtapeService, ImportPointService importPointService) {
+    public ImportTest(ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService) {
         this.importEtapeService = importEtapeService;
         this.importPointService = importPointService;
+        this.importResultatService = importResultatService;
     }
 
     @Test
@@ -38,4 +42,17 @@ public class ImportTest {
             System.out.println(s);
         System.out.println("\n\n");
     }
+
+    @Test
+    void resultats() {
+        List<String> output = importResultatService.importDataFile(new File("src/main/resources/data/resultat.csv"));
+
+        System.out.println("\n\nOutput : \n");
+        for (String s : output)
+            System.out.println(s);
+        System.out.println("\n\n");
+    }
+
+
+
 }
