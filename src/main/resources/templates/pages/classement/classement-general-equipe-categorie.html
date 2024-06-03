@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}" lang="fr">
+<head>
+    <title>Liste des étapes</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Classement général par équipe par catégorie : <span th:class="h2"
+                                                                                       th:text="${course.nom}"></span>
+            </h1>
+        </div>
+
+        <p th:text="${error}" class="text-danger py-2"></p>
+        <div class="card-body">
+
+            <!--
+                        <form class="form" action="#" th:action="@{/user/filtre-classement-equipe-categorie}" method="post"
+                              enctype="multipart/form-data">
+                            <div class="form-group">
+                                <select th:class="px-2" id="categorie" name="idCategorie"
+                                        class="form-control">
+                                    <option th:each="categorie : ${listeCategorie}"
+                                            th:value="${categorie.id}"
+                                            th:text="${categorie.nom}"></option>
+                                </select>
+                                <button type="submit" class="btn btn-primary py-1 w-100 mb-4">Valider</button>
+                            </div>
+                        </form>
+            -->
+
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">Rang</th>
+                        <th scope="col">Categorie</th>
+                        <th scope="col">Equipe</th>
+                        <th scope="col">Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${classements}"> <!--th:class="${item.getCouleur()}" -->
+                        <td th:text="${item.rangEquipe}"></td>
+                        <td th:text="${item.categorie.nom}"></td>
+                        <td th:text="${item.equipe.nom}"></td>
+                        <td th:text="${item.points}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

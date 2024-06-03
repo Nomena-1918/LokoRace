@@ -7,6 +7,7 @@ import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepositor
 import org.race.loko.repositories.business.CoureurRepository;
 import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.repositories.business.EtapeRepository;
+import org.race.loko.repositories.business.views.ClassementEquipeCategorieRepository;
 import org.race.loko.repositories.business.views.ClassementEquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,15 +28,17 @@ public class UserController {
     private final CoureurRepository coureurRepository;
     private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
     private final ClassementEquipeRepository classementEquipeRepository;
+    private final ClassementEquipeCategorieRepository classementEquipeCategorieRepository;
 
 
     @Autowired
-    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository) {
+    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository, ClassementEquipeCategorieRepository classementEquipeCategorieRepository) {
         this.courseRepository = courseRepository;
         this.etapeRepository = etapeRepository;
         this.coureurRepository = coureurRepository;
         this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
         this.classementEquipeRepository = classementEquipeRepository;
+        this.classementEquipeCategorieRepository = classementEquipeCategorieRepository;
     }
 
     @GetMapping("/home")
@@ -85,6 +88,17 @@ public class UserController {
         model.addAttribute("classements", classements);
 
         return "pages/classement/classement-general-equipe";
+    }
+
+    @GetMapping("/classement-general-equipe-categorie")
+    public String classementGeneralEquipeCategorie(Model model) {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementEquipeCategorieRepository.findByCourseId(course.getId());
+
+        model.addAttribute("course", course);
+        model.addAttribute("classements", classements);
+
+        return "pages/classement/classement-general-equipe-categorie";
     }
 
 

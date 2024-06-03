@@ -18,27 +18,6 @@ FROM coureur_etapes ce
 ORDER BY id_etape, dateheure_arrivee;
 
 
--- VUE POUR AVOIR LES RANGS DES COUREURS PAR ETAPE PAR CATEGORIE
-CREATE OR REPLACE VIEW v_rang_coureur_etape_categorie AS
-SELECT vrce.id,
-       id_course,
-       vrce.id_coureur,
-       cc.id_categorie,
-       c.nom                                                                                             as nom_categorie,
-       nom_coureur,
-       nom_equipe,
-       id_etape,
-       dateheure_depart,
-       dateheure_arrivee,
-       duree_penalite,
-       duree_course,
-       dense_rank() OVER (PARTITION BY id_etape, cc.id_categorie ORDER BY (dateheure_arrivee + duree_penalite)) AS rang_coureur
-FROM v_rang_coureur_etape vrce
-         join coureur_categories cc on cc.id_coureur = vrce.id_coureur
-         join categories c on c.id = cc.id_categorie
-ORDER BY id_etape, dateheure_arrivee;
-
-
 
 -- VUE POUR AVOIR LES RANGS DES COUREURS EN FONCTION DE LEUR RANG
 create or replace view v_classement_etape as
@@ -57,26 +36,6 @@ order by id_etape, rang_coureur;
 
 
 
--- VUE POUR AVOIR LES RANGS DES COUREURS EN FONCTION DE LEUR RANG PAR CATEGORIE
-create or replace view v_classement_etape_categorie as
-select row_number() over () as id,
-       id_course,
-       vrce.id               as id_v_rang_coureur_etape_categorie,
-       id_etape,
-       id_coureur,
-       id_categorie,
-       nom_categorie,
-       nom_coureur,
-       nom_equipe,
-       rang_coureur,
-       coalesce(points, 0)  as points
-from v_rang_coureur_etape_categorie vrce
-         left join point_classements pc on rang_coureur = pc.rang
-order by id_etape, id_categorie, rang_coureur;
-
-
-
-
 -- VUE POUR AVOIR LES RANGS DES EQUIPES : SOMME DES POINTS PAR COUREUR ET LEUR RANG EN FONCTION DE LA SOMME DES POINTS
 create or replace view v_classement_equipe as
 select row_number() over ()                          as id,
@@ -89,24 +48,6 @@ from v_classement_etape
          join coureurs c on v_classement_etape.id_coureur = c.id
 group by id_course, id_equipe, nom_equipe
 order by rang_equipe;
-
-
-
--- VUE POUR AVOIR LES RANGS DES EQUIPES : SOMME DES POINTS PAR COUREUR ET LEUR RANG EN FONCTION DE LA SOMME DES POINTS PAR CATEGORIE
-create or replace view v_classement_equipe_categorie as
-select row_number() over ()                          as id,
-       id_course,
-       id_categorie,
-       nom_categorie,
-       id_equipe,
-       nom_equipe,
-       sum(points)                                   as points,
-       dense_rank() OVER (PARTITION BY id_categorie ORDER BY SUM(points) DESC) AS rang_equipe
-from v_classement_etape_categorie
-         join coureurs c on v_classement_etape_categorie.id_coureur = c.id
-group by id_course, id_categorie, id_equipe, nom_equipe, nom_categorie
-order by id_categorie, rang_equipe;
-
 
 
 -- VUE POUR AVOIR LES RANGS DES EQUIPES : SOMME DES POINTS PAR COUREUR ET LEUR RANG EN FONCTION DE LA SOMME DES POINTS
@@ -134,7 +75,63 @@ WHERE nb_coureurs_inscrits = nb_coureurs_requis
 GROUP BY id_course, id_equipe
 ORDER BY rang_equipe;*/
 
+-- ========== CATEGORIE ======================
 
 
+-- VUE POUR AVOIR LES RANGS DES COUREURS PAR ETAPE PAR CATEGORIE
+CREATE OR REPLACE VIEW v_rang_coureur_etape_categorie AS
+SELECT vrce.id,
+       id_course,
+       vrce.id_coureur,
+       cc.id_categorie,
+       c.nom                                                                                             as nom_categorie,
+       nom_coureur,
+       nom_equipe,
+       id_etape,
+       dateheure_depart,
+       dateheure_arrivee,
+       duree_penalite,
+       duree_course,
+       dense_rank() OVER (PARTITION BY id_etape, cc.id_categorie ORDER BY (dateheure_arrivee + duree_penalite)) AS rang_coureur
+FROM v_rang_coureur_etape vrce
+         join coureur_categories cc on cc.id_coureur = vrce.id_coureur
+         join categories c on c.id = cc.id_categorie
+ORDER BY id_etape, dateheure_arrivee;
+
+
+
+-- VUE POUR AVOIR LES RANGS DES COUREURS EN FONCTION DE LEUR RANG PAR CATEGORIE
+create or replace view v_classement_etape_categorie as
+select row_number() over () as id,
+       id_course,
+       vrce.id               as id_v_rang_coureur_etape_categorie,
+       id_etape,
+       id_coureur,
+       id_categorie,
+       nom_categorie,
+       nom_coureur,
+       nom_equipe,
+       rang_coureur,
+       coalesce(points, 0)  as points
+from v_rang_coureur_etape_categorie vrce
+         left join point_classements pc on rang_coureur = pc.rang
+order by id_etape, id_categorie, rang_coureur;
+
+
+
+-- VUE POUR AVOIR LES RANGS DES EQUIPES : SOMME DES POINTS PAR COUREUR ET LEUR RANG EN FONCTION DE LA SOMME DES POINTS PAR CATEGORIE
+create or replace view v_classement_equipe_categorie as
+select row_number() over ()                          as id,
+       id_course,
+       id_categorie,
+       nom_categorie,
+       id_equipe,
+       nom_equipe,
+       sum(points)                                   as points,
+       dense_rank() OVER (PARTITION BY id_categorie ORDER BY SUM(points) DESC) AS rang_equipe
+from v_classement_etape_categorie
+         join coureurs c on v_classement_etape_categorie.id_coureur = c.id
+group by id_course, id_categorie, id_equipe, nom_equipe, nom_categorie
+order by id_categorie, rang_equipe;
 
 

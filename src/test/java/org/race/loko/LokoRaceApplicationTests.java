@@ -3,9 +3,11 @@ package org.race.loko;
 import org.junit.jupiter.api.Test;
 import org.race.loko.repositories.business.CoureurCategorieRepository;
 import org.race.loko.repositories.business.CoureurRepository;
+import org.race.loko.repositories.business.views.ClassementCoureurEtapeCategorieRepository;
 import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.repositories.business.EtapeRepository;
+import org.race.loko.repositories.business.views.ClassementEquipeCategorieRepository;
 import org.race.loko.repositories.business.views.ClassementEquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,16 +21,19 @@ class LokoRaceApplicationTests {
     private final ClassementEquipeRepository classementEquipeRepository;
     private final CoureurCategorieRepository coureurCategorieRepository;
     private final CoureurRepository coureurRepository;
-
+    private final ClassementCoureurEtapeCategorieRepository classementCoureurEtapeCategorieRepository;
+    private final ClassementEquipeCategorieRepository classementEquipeCategorieRepository;
 
     @Autowired
-    public LokoRaceApplicationTests(CourseRepository courseRepository, EtapeRepository etapeRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository, CoureurCategorieRepository coureurCategorieRepository, CoureurRepository coureurRepository, CoureurRepository coureurRepository1) {
+    public LokoRaceApplicationTests(CourseRepository courseRepository, EtapeRepository etapeRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository, CoureurCategorieRepository coureurCategorieRepository, CoureurRepository coureurRepository, CoureurRepository coureurRepository1, ClassementCoureurEtapeCategorieRepository classementCoureurEtapeCategorieRepository, ClassementEquipeCategorieRepository classementEquipeCategorieRepository) {
         this.courseRepository = courseRepository;
         this.etapeRepository = etapeRepository;
         this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
         this.classementEquipeRepository = classementEquipeRepository;
         this.coureurCategorieRepository = coureurCategorieRepository;
         this.coureurRepository = coureurRepository1;
+        this.classementCoureurEtapeCategorieRepository = classementCoureurEtapeCategorieRepository;
+        this.classementEquipeCategorieRepository = classementEquipeCategorieRepository;
     }
 
     @Test
@@ -69,6 +74,22 @@ class LokoRaceApplicationTests {
         System.out.println("\n\n"+coureur+"\n\n");
     }
 
+
+    @Test
+    void classementsCoureursCategorie() {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementCoureurEtapeCategorieRepository.findByCourseId(course.getId());
+
+        System.out.println("\n\n"+classements+"\n\n");
+    }
+
+    @Test
+    void classementsEquipesCategorie() {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementEquipeCategorieRepository.findByCourseId(course.getId());
+
+        System.out.println("\n\n"+classements+"\n\n");
+    }
 
 
 }
