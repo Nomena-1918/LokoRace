@@ -19,9 +19,10 @@
                         <th scope="col"></th>
                         <th scope="col">Nom</th>
                         <th scope="col">Distance (km)</th>
-                        <th scope="col">Date et heure de début</th>
+                        <th scope="col">Date heure début</th>
                         <th scope="col">Rang</th>
-                        <th scope="col">Coureurs par équipe</th>
+                        <th scope="col">Nombre coureurs/équipe</th>
+                        <th scope="col" th:if="${#strings.equalsIgnoreCase(session.user.getClass().getSimpleName(), 'Equipe')}">Coureurs affectés</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -33,6 +34,13 @@
                         <td th:text="${etape.getDateHeureDebutStr()}"></td>
                         <td th:text="${etape.rangEtape}"></td>
                         <td th:text="${etape.nombreCoureurEquipe}"></td>
+                        <td th:if="${#strings.equalsIgnoreCase(session.user.getClass().getSimpleName(), 'Equipe')}">
+                            <ul>
+                                <li th:each="coureurEtape : ${etape.coureursEtape}" th:if="${coureurEtape.coureur.equipe.id == (session.user).getId()}">
+                                    <span th:text="${coureurEtape.coureur.getNumeroDossard() + ' - ' + coureurEtape.coureur.nom + ' ' + coureurEtape.coureur.prenom + ' ' + coureurEtape.getDureeEtape()}"></span><br/>
+                                </li>
+                            </ul>
+                        </td>
                         <td style="display:flex">
                             <div th:switch="${session.user.getClass().getSimpleName()}">
                                 <div th:case="Equipe">
@@ -115,14 +123,6 @@
                                                                             th:value="${coureurEtape.coureur.id}"
                                                                             th:text="${coureurEtape.coureur.getEquipe().getNom() +' - '+ coureurEtape.coureur.getNumeroDossard() + ' : ' + coureurEtape.coureur.nom + ' ' + coureurEtape.coureur.prenom}"></option>
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group p-2">
-                                                                <label class="col-form-label">Départ : </label>
-                                                                <input type="datetime-local" step="1"
-                                                                       class="form-control"
-                                                                       th:value="${etape.dateHeureDebut.toString()}"
-                                                                       th:field="*{dateHeureDepart}"/>
                                                             </div>
 
                                                             <div class="form-group p-2">

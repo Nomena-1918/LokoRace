@@ -24,6 +24,7 @@
                         <th scope="col">Coureur</th>
                         <th scope="col">Départ</th>
                         <th scope="col">Arrivée</th>
+                        <th scope="col">Pénalité</th>
                         <th scope="col">Points</th>
                     </tr>
                     </thead>
@@ -36,6 +37,7 @@
                         <td th:text="${item.coureurEtape.coureur.getNumeroDossard() + ' : '+ item.coureurEtape.coureur.nom +' '+ item.coureurEtape.coureur.prenom}"></td>
                         <td th:text="${T(org.race.loko.utils.CustomDateTimeUtils).formatFR(item.coureurEtape.dateHeureDepart)}"></td>
                         <td th:text="${T(org.race.loko.utils.CustomDateTimeUtils).formatFR(item.coureurEtape.dateHeureArrivee)}"></td>
+                        <td th:text="${item.getDureePenaliteStr()}"></td>
                         <td th:text="${item.points}"></td>
                     </tr>
                     </tbody>

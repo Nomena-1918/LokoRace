@@ -1,15 +1,13 @@
 package org.race.loko.models.business;
 
-import groovy.transform.Immutable;
-import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
-import org.race.loko.models.profil.Equipe;
+import org.race.loko.utils.CustomDateTimeUtils;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -34,5 +32,9 @@ public class CoureurEtape {
 
     @Column(name = "dateheure_arrivee")
     private LocalDateTime dateHeureArrivee;
+
+    public String getDureeEtape() {
+        return Objects.requireNonNullElse(CustomDateTimeUtils.formatDuration(Duration.between(dateHeureDepart, dateHeureArrivee)), "");
+    }
 
 }

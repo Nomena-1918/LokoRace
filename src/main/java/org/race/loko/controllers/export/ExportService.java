@@ -36,7 +36,7 @@ public class ExportService {
         renderer.createPDF(writer);
     }
 
-    public void exportPdf(String templateName , Map<String , Object> objects , OutputStream writer) throws IOException {
+    public void exportPdf(String templateName , Map<String , Object> objects , OutputStream writer) {
         String html = parseThymeleafTemplate(templateName , objects);
         generatePdf(html  , writer);
     }

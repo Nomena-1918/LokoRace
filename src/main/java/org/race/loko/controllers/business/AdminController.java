@@ -73,8 +73,8 @@ public class AdminController {
 
             // Convert LocalTime to Duration
             Duration dureeCourse = Duration.between(LocalTime.MIDNIGHT, coureurEtapeForm.getTemps());
+            coureurEtape.setDateHeureDepart(coureurEtape.getEtape().getDateHeureDebut());
 
-            coureurEtape.setDateHeureDepart(coureurEtapeForm.getDateHeureDepart());
             coureurEtape.setDateHeureArrivee(coureurEtapeForm.getDateHeureDepart().plus(dureeCourse));
 
             coureurEtapeRepository.save(coureurEtape);

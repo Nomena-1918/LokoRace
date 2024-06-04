@@ -2,6 +2,8 @@ package org.race.loko.controllers.business;
 
 import org.race.loko.models.business.Categorie;
 import org.race.loko.models.business.Coureur;
+import org.race.loko.models.business.Etape;
+import org.race.loko.models.business.views.ClassementCoureurEtape;
 import org.race.loko.models.business.views.ClassementEquipe;
 import org.race.loko.models.business.views.ClassementEquipeCategorie;
 import org.race.loko.models.dto.CoureurEtapeForm;
@@ -71,6 +73,21 @@ public class UserController {
         return "pages/etape/liste-etape";
     }
 
+    /*@GetMapping("/classement-general-individuel")
+    public String classementGeneralIndividuel(Model model) {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementCoureurEtapeRepository.findByCourseId(course.getId());
+
+// Regrouper les classements par étape
+        Map<Etape, List<ClassementCoureurEtape>> classementsParEtape = classements.stream()
+                .collect(Collectors.groupingBy(classement -> classement.getCoureurEtape().getEtape()));
+
+        model.addAttribute("course", course);
+        model.addAttribute("classementsParEtape", classementsParEtape); // Passer les classements regroupés au modèle
+
+        return "pages/classement/classement-general-individuel";
+    }*/
+
     @GetMapping("/classement-general-individuel")
     public String classementGeneralIndividuel(Model model) {
         var course = courseRepository.findLatestCourse();
@@ -81,6 +98,8 @@ public class UserController {
 
         return "pages/classement/classement-general-individuel";
     }
+
+
 
     @GetMapping("/classement-general-equipe")
     public String classementGeneralEquipe(Model model) {

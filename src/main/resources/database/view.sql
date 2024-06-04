@@ -51,6 +51,7 @@ select row_number() over () as id,
        nom_coureur,
        nom_equipe,
        rang_coureur,
+       duree_penalite,
        coalesce(points, 0)  as points
 from v_rang_coureur_etape rce
          left join point_classements pc on rang_coureur = pc.rang
@@ -134,6 +135,7 @@ select row_number() over () as id,
        nom_categorie,
        nom_coureur,
        nom_equipe,
+       duree_penalite,
        rang_coureur,
        coalesce(points, 0)  as points
 from v_rang_coureur_etape_categorie vrce
