@@ -46,6 +46,4 @@ public class Coureur {
         this.id = id;
         return this;
     }
-
-    Duration d = Duration.ofDays(1).plus(Duration.ofHours(2));
 }

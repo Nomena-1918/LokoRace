@@ -7,17 +7,18 @@ import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Type;
 import org.race.loko.models.profil.Equipe;
+import org.race.loko.utils.DateTimeUtils;
 
 import java.time.Duration;
 
 @Getter
 @Setter
 @Entity
-@Immutable // car c'est une vue, les données ne sont pas modifiables
 @Table(name = "penalite_etape_equipe")
 public class PenaliteEtapeEquipe {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -33,5 +34,9 @@ public class PenaliteEtapeEquipe {
     private Duration dureePenalite;
 
     public PenaliteEtapeEquipe() {
+    }
+
+    public String getDureePenaliteStr() {
+        return DateTimeUtils.formatDuration(dureePenalite);
     }
 }

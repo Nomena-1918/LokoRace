@@ -24,6 +24,11 @@ public class Equipe {
     @Column(name = "mot_de_passe", nullable = false, unique = true)
     public String mdp;
 
+    public Equipe setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Equipe.class.getSimpleName() + "[", "]")

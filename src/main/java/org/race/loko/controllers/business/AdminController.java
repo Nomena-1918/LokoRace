@@ -2,11 +2,14 @@ package org.race.loko.controllers.business;
 
 import jakarta.transaction.Transactional;
 import org.postgresql.util.PSQLException;
+import org.race.loko.models.business.Etape;
+import org.race.loko.models.business.PenaliteEtapeEquipe;
 import org.race.loko.models.dto.CoureurEtapeForm;
 import org.race.loko.models.business.CoureurEtape;
-import org.race.loko.repositories.business.CoureurCategorieRepository;
-import org.race.loko.repositories.business.CoureurEtapeRepository;
-import org.race.loko.repositories.business.CourseRepository;
+import org.race.loko.models.dto.PenaliteEquipeForm;
+import org.race.loko.models.profil.Equipe;
+import org.race.loko.repositories.business.*;
+import org.race.loko.repositories.profil.EquipeRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
 import org.race.loko.utils.csv.service.ImportResultatService;
@@ -35,16 +38,21 @@ public class AdminController {
     private final ImportResultatService importResultatService;
     private final CoureurCategorieRepository coureurCategorieRepository;
     private final CourseRepository courseRepository;
-
+    private final PenaliteEtapeEquipeRepository penaliteEtapeEquipeRepository;
+    private final EtapeRepository etapeRepository;
+    private final EquipeRepository equipeRepository;
 
     @Autowired
-    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository, CourseRepository courseRepository) {
+    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository, CourseRepository courseRepository, PenaliteEtapeEquipeRepository penaliteEtapeEquipeRepository, EtapeRepository etapeRepository, EquipeRepository equipeRepository) {
         this.coureurEtapeRepository = coureurEtapeRepository;
         this.importEtapeService = importEtapeService;
         this.importPointService = importPointService;
         this.importResultatService = importResultatService;
         this.coureurCategorieRepository = coureurCategorieRepository;
         this.courseRepository = courseRepository;
+        this.penaliteEtapeEquipeRepository = penaliteEtapeEquipeRepository;
+        this.etapeRepository = etapeRepository;
+        this.equipeRepository = equipeRepository;
     }
 
     @GetMapping("/home")
@@ -68,7 +76,6 @@ public class AdminController {
 
             coureurEtape.setDateHeureDepart(coureurEtapeForm.getDateHeureDepart());
             coureurEtape.setDateHeureArrivee(coureurEtapeForm.getDateHeureDepart().plus(dureeCourse));
-            //coureurEtape.setDureePenalite(coureurEtapeForm.getDureePenalite());
 
             coureurEtapeRepository.save(coureurEtape);
         } catch (DataAccessException e) {
@@ -164,16 +171,58 @@ public class AdminController {
         return "pages/import/assign-categ-coureur";
     }
 
+
     @GetMapping("/penalite-equipe")
     public String penaliteEquipe(Model model) {
         var course = courseRepository.findLatestCourse();
-        //var classements = classementCoureurEtapeRepository.findByCourseId(course.getId());
+        var listePenalite = penaliteEtapeEquipeRepository.findAllByCourseId(course.getId());
+        var etapes = etapeRepository.findByCourseId(course.getId());
+        var equipes = equipeRepository.findAll();
 
         model.addAttribute("course", course);
-        //model.addAttribute("listePenalite", course);
+        model.addAttribute("listePenalite", listePenalite);
+        model.addAttribute("etapes", etapes);
+        model.addAttribute("equipes", equipes);
+        model.addAttribute("penaliteEquipeForm", new PenaliteEquipeForm());
 
+        if (model.containsAttribute("error")) {
+            String errorMessage = (String) model.getAttribute("error");
+            model.addAttribute("error", errorMessage);
+        }
 
         return "pages/penalite/penalite-equipe";
+    }
+
+    @PostMapping("/penalite-equipe")
+    public String ajouterPenalite(@ModelAttribute PenaliteEquipeForm penaliteEquipeForm,
+                                  RedirectAttributes redirectAttributes) {
+        try {
+            PenaliteEtapeEquipe penalite = new PenaliteEtapeEquipe();
+            penalite.setEtape(new Etape().setId(penaliteEquipeForm.getEquipe()));
+            penalite.setEquipe(new Equipe().setId(penaliteEquipeForm.getEquipe()));
+            Duration dureePenalite = Duration.between(LocalTime.MIDNIGHT, penaliteEquipeForm.getDureePenalite());
+
+            penalite.setDureePenalite(dureePenalite);
+            penaliteEtapeEquipeRepository.save(penalite);
+        }
+        catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            throw e;
+        }
+
+        return "redirect:/admin/penalite-equipe";
+    }
+
+    @PostMapping("/penalite-equipe/delete")
+    public String supprimerPenalite(@RequestParam("id") Long penaliteId, RedirectAttributes redirectAttributes) {
+        try {
+            // Ajouter la logique pour supprimer une pénalité
+            penaliteEtapeEquipeRepository.deleteById(penaliteId);
+        }
+        catch (Exception e ) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return "redirect:/admin/penalite-equipe";
     }
 
 

@@ -13,7 +13,6 @@ public class CoureurEtapeForm {
     Long idCoureur;
     LocalDateTime dateHeureDepart;
     LocalTime temps;
-    Duration dureePenalite;
 
     public CoureurEtapeForm() {
     }

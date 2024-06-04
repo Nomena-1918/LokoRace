@@ -3,7 +3,7 @@
       layout:decorate="~{layout/main_layout}" lang="fr">
 <head>
     <title>Liste des étapes</title>
-</head>
+    </head>
 <body>
 <div layout:fragment="content" class="container">
     <div class="card">
@@ -12,13 +12,48 @@
         </div>
         <p th:text="${error}" class="text-danger py-2"></p>
         <div class="card-body">
+            <!-- Bouton pour afficher le modal d'ajout de pénalité -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPenaltyModal">
+                Ajouter une pénalité
+            </button>
 
+            <!-- Modal pour ajouter une pénalité -->
+            <div class="modal fade" id="addPenaltyModal" tabindex="-1" role="dialog" aria-labelledby="addPenaltyModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addPenaltyModalLabel">Ajouter une pénalité</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form th:action="@{/admin/penalite-equipe}" th:object="${penaliteEquipeForm}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="etape">Etape</label>
+                                    <select class="form-control" id="etape" name="etape">
+                                        <option th:each="etape : ${etapes}" th:field="*{etape}" th:value="${etape.id}" th:text="${etape.nom}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="equipe">Equipe</label>
+                                    <select class="form-control" id="equipe" name="equipe">
+                                        <option th:each="equipe : ${equipes}" th:field="*{equipe}" th:value="${equipe.id}" th:text="${equipe.nom}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dureePenalite">Durée de pénalité (HH:mm:ss)</label>
+                                    <input type="time" step="1" class="form-control" th:field="*{dureePenalite}" id="dureePenalite" name="dureePenalite" placeholder="00:00:00">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-<!-- Modal ici pour ajouter une pénalité -->
-
-
-
-            <div class="table-responsive">
+            <div class="table-responsive mt-3">
                 <table class="table mb-0">
                     <thead>
                     <tr>
@@ -30,21 +65,39 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr> <!--th:each="etape, iterStat : ${listePenalite}"-->
-                        <!--<td th:text="${iterStat.count}"></td>
-                        <td th:text="${etape.nom}"></td>
-                        <td th:text="${etape.distanceKm}"></td>
-                        <td th:text="${etape.getDateHeureDebutStr()}"></td>
-                        <td th:text="${etape.rangEtape}"></td>-->
-                        <td>1</td>
-                        <td>Etape</td>
-                        <td>Equipe</td>
-                        <td>Durée de pénalité</td>
+                    <tr th:each="item, iterStat : ${listePenalite}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${item.etape.nom}"></td>
+                        <td th:text="${item.equipe.nom}"></td>
+                        <td th:text="${item.getDureePenaliteStr()}"></td>
                         <td>
+                            <!-- Bouton pour afficher le modal de suppression -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    th:attr="data-bs-target=${'#deletePenaltyModal_' + item.id}">
+                                Supprimer
+                            </button>
 
-                            <!-- Bouton pour supprimer une pénalité avec message de confirmation ici -->
-
+                            <!-- Modal pour confirmer la suppression d'une pénalité -->
+                            <div class="modal fade" th:id="${'deletePenaltyModal_' + item.id}" tabindex="-1" role="dialog" aria-labelledby="deletePenaltyModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deletePenaltyModalLabel">Confirmer la suppression</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Voulez-vous vraiment supprimer la pénalité ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                            <form th:action="@{/admin/penalite-equipe/delete}" method="post">
+                                                <input type="hidden" name="id" th:value="${item.id}">
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
