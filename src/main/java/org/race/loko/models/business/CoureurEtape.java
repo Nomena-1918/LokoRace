@@ -1,8 +1,12 @@
 package org.race.loko.models.business;
 
+import groovy.transform.Immutable;
+import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.race.loko.models.profil.Equipe;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -31,6 +35,4 @@ public class CoureurEtape {
     @Column(name = "dateheure_arrivee")
     private LocalDateTime dateHeureArrivee;
 
-    @Column(name = "duree_penalite", nullable = false, columnDefinition = "interval default '00:00:00'")
-    private Duration dureePenalite;
 }

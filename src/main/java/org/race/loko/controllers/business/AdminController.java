@@ -2,10 +2,11 @@ package org.race.loko.controllers.business;
 
 import jakarta.transaction.Transactional;
 import org.postgresql.util.PSQLException;
-import org.race.loko.models.CoureurEtapeForm;
+import org.race.loko.models.dto.CoureurEtapeForm;
 import org.race.loko.models.business.CoureurEtape;
 import org.race.loko.repositories.business.CoureurCategorieRepository;
 import org.race.loko.repositories.business.CoureurEtapeRepository;
+import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
 import org.race.loko.utils.csv.service.ImportResultatService;
@@ -33,14 +34,17 @@ public class AdminController {
     private final ImportPointService importPointService;
     private final ImportResultatService importResultatService;
     private final CoureurCategorieRepository coureurCategorieRepository;
+    private final CourseRepository courseRepository;
+
 
     @Autowired
-    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository) {
+    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository, CourseRepository courseRepository) {
         this.coureurEtapeRepository = coureurEtapeRepository;
         this.importEtapeService = importEtapeService;
         this.importPointService = importPointService;
         this.importResultatService = importResultatService;
         this.coureurCategorieRepository = coureurCategorieRepository;
+        this.courseRepository = courseRepository;
     }
 
     @GetMapping("/home")
@@ -159,6 +163,20 @@ public class AdminController {
 
         return "pages/import/assign-categ-coureur";
     }
+
+    @GetMapping("/penalite-equipe")
+    public String penaliteEquipe(Model model) {
+        var course = courseRepository.findLatestCourse();
+        //var classements = classementCoureurEtapeRepository.findByCourseId(course.getId());
+
+        model.addAttribute("course", course);
+        //model.addAttribute("listePenalite", course);
+
+
+        return "pages/penalite/penalite-equipe";
+    }
+
+
 
 
 }

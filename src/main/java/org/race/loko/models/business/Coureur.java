@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.race.loko.models.profil.Equipe;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -45,4 +46,6 @@ public class Coureur {
         this.id = id;
         return this;
     }
+
+    Duration d = Duration.ofDays(1).plus(Duration.ofHours(2));
 }

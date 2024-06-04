@@ -98,10 +98,16 @@ create table parametrage_categorie(
     tranche_age int4range
 );
 
+create table penalite_etape_equipe(
+    id serial primary key,
+    id_etape int references etapes(id),
+    id_equipe int references equipes(id),
+    duree_penalite interval not null check ( duree_penalite >= '00:00:00'::interval )
+);
 
-/*
-insert into parametrage_categorie(id_categorie, id_genre, tranche_age) values
-(1, 1, int4range(0, 18));
+insert into penalite_etape_equipe(id_etape, id_equipe, duree_penalite)
+values (1, 1, '01:00:00'),
+       (1, 1, '01:00:00'),
 
-select 19 <@ tranche_age from parametrage_categorie;
-*/
+       (2, 2, '01:00:00'),
+       (3, 3, '00:00:10');

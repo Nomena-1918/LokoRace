@@ -42,7 +42,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${classements}"> <!--th:class="${item.getCouleur()}" -->
+                    <tr th:each="item : ${classements}"> <!--th:class="${item.getCouleur()}"> -->
                         <td th:text="${item.rangEquipe}"></td>
                         <td th:text="${item.categorie.nom}"></td>
                         <td th:text="${item.equipe.nom}"></td>

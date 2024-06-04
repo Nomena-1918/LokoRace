@@ -1,4 +1,4 @@
-package org.race.loko.models;
+package org.race.loko.models.dto;
 
 import lombok.Getter;
 import lombok.Setter;

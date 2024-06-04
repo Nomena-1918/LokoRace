@@ -1,6 +1,6 @@
 package org.race.loko.controllers.business;
 
-import org.race.loko.models.CoureurEtapeForm;
+import org.race.loko.models.dto.CoureurEtapeForm;
 import org.race.loko.models.business.Coureur;
 import org.race.loko.models.profil.Equipe;
 import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;

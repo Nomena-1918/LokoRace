@@ -6,7 +6,7 @@ VALUES ('Étape 1', 18.0, '2024-06-01 10:00:00', 1, 1, 1),
        ('Étape 2', 19.0, '2024-06-02 10:00:00', 2, 2, 1);
 /*
 INSERT INTO admin (email, mot_de_passe)
-VALUES ('admin@ultimateteamrace.com', 'adminpassword');
+VALUES ('admin@race.com', 'admin');
 */
 INSERT INTO genres (nom)
 VALUES ('Homme'),
@@ -45,7 +45,6 @@ VALUES
 
 
 
-
 /*
 INSERT INTO coureur_categories (id_coureur, id_categorie)
 VALUES (1, 4), -- Haja Razafindrakoto en Senior
@@ -62,7 +61,7 @@ INSERT INTO coureur_etapes (id_coureur, id_etape, dateheure_depart, dateheure_ar
 VALUES (1, 1, '2024-06-01 10:00:00', '2024-06-01 14:30:00', '00:00:00'),
        (3, 1, '2024-06-01 10:00:00', '2024-06-01 14:30:00', '00:00:00'),
 
---       (1, 2, '2024-06-02 10:00:00', '2024-06-02 14:30:00', '00:00:00'),
+       (1, 2, '2024-06-02 10:00:00', '2024-06-02 14:30:00', '00:00:00'),
        (2, 2, '2024-06-02 10:00:00', '2024-06-02 14:35:00', '00:02:00'),
        (3, 2, '2024-06-02 10:00:00', '2024-06-02 15:10:00', '00:00:00'),
        (4, 2, '2024-06-02 10:00:00', '2024-06-02 14:55:00', '00:03:00');

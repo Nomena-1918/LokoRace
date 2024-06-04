@@ -66,6 +66,8 @@ BEGIN
     ALTER TABLE etapes DISABLE TRIGGER ALL;
     ALTER TABLE point_classements DISABLE TRIGGER ALL;
     ALTER TABLE courses DISABLE TRIGGER ALL;
+    ALTER TABLE penalite_etape_equipe DISABLE TRIGGER ALL;
+
 
     -- Truncate all tables except "admin"
     TRUNCATE TABLE coureur_etapes RESTART IDENTITY CASCADE;
@@ -77,6 +79,8 @@ BEGIN
     TRUNCATE TABLE etapes RESTART IDENTITY CASCADE;
     TRUNCATE TABLE point_classements RESTART IDENTITY CASCADE;
     TRUNCATE TABLE courses RESTART IDENTITY CASCADE;
+    TRUNCATE TABLE penalite_etape_equipe RESTART IDENTITY CASCADE ;
+
 
     -- Enable triggers after truncation
     ALTER TABLE coureur_etapes ENABLE TRIGGER ALL;
@@ -88,6 +92,8 @@ BEGIN
     ALTER TABLE etapes ENABLE TRIGGER ALL;
     ALTER TABLE point_classements ENABLE TRIGGER ALL;
     ALTER TABLE courses ENABLE TRIGGER ALL;
+    ALTER TABLE penalite_etape_equipe ENABLE TRIGGER ALL;
+
 
     -- Return true if everything went well
     RETURN true;

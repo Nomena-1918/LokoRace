@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
+
+import static org.race.loko.utils.DateTimeUtils.formatDuration;
 
 @SpringBootTest
 public class ImportTest {
@@ -54,4 +57,18 @@ public class ImportTest {
         System.out.println("\n\n");
     }
 
+    @Test
+    void name() {
+        // Exemple de durée
+        Duration duration = Duration
+                .ofHours(2)
+                .plusMinutes(30)
+                .plusSeconds(45); // 2 heure, 30 minutes et 45 secondes
+
+        // Formater la durée en HH:mm:ss
+        String formattedDuration = formatDuration(duration);
+
+        // Afficher le résultat
+        System.out.println(formattedDuration);
+    }
 }

@@ -46,7 +46,6 @@ public class EquipeController {
             coureurEtape.setEtape(etape.get());
             coureurEtape.setCoureur(new Coureur().setId(idCoureur));
             coureurEtape.setDateHeureDepart(etape.get().getDateHeureDebut());
-            coureurEtape.setDureePenalite(Duration.ZERO);
 
             coureurEtapeRepository.save(coureurEtape);
         } catch (DataAccessException e) {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}" lang="fr">
+<head>
+    <title>Liste des étapes</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Pénalités de la course : <span th:class="h2" th:text="${course.nom}"></span></h1>
+        </div>
+        <p th:text="${error}" class="text-danger py-2"></p>
+        <div class="card-body">
+
+
+<!-- Modal ici pour ajouter une pénalité -->
+
+
+
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Etape</th>
+                        <th scope="col">Equipe</th>
+                        <th scope="col">Durée de pénalité</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr> <!--th:each="etape, iterStat : ${listePenalite}"-->
+                        <!--<td th:text="${iterStat.count}"></td>
+                        <td th:text="${etape.nom}"></td>
+                        <td th:text="${etape.distanceKm}"></td>
+                        <td th:text="${etape.getDateHeureDebutStr()}"></td>
+                        <td th:text="${etape.rangEtape}"></td>-->
+                        <td>1</td>
+                        <td>Etape</td>
+                        <td>Equipe</td>
+                        <td>Durée de pénalité</td>
+                        <td>
+
+                            <!-- Bouton pour supprimer une pénalité avec message de confirmation ici -->
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
