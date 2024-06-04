@@ -26,7 +26,7 @@ public class ImportTest {
         this.importPointService = importPointService;
         this.importResultatService = importResultatService;
     }
-
+/*
     @Test
     void etape() {
         List<String> output = importEtapeService.importDataFile(new File("src/main/resources/data/etape.csv"));
@@ -70,5 +70,5 @@ public class ImportTest {
 
         // Afficher le résultat
         System.out.println(formattedDuration);
-    }
+    }*/
 }

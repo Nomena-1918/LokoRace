@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #867a7a;
+            font-family: Arial, sans-serif;
+        }
+
+        p {
+            color: #333333;
+            font-size: 24px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<h1 class="centered-text1">1er</h1>
+<h1 class="centered-text2" th:text="${equipe}"></h1>
+<h1 class="centered-text3" th:text="${points}"></h1>
+</body>
+</html>
