@@ -22,7 +22,8 @@
             background-color: white;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 250px auto auto;
         }
 
         h1 {
@@ -46,22 +47,53 @@
             margin-bottom: 20px;
         }
 
-        .signature-section div {
-            text-align: center;
+        span {
+            color: #333333;
+            font-size: 34px;
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-        .signature-section span {
-            font-weight: bold;
-            color: #666;
+        /* Styles pour la table sans bordure */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border: none;
+            padding: 10px;
+        }
+
+        .title {
+            text-align: left;
+        }
+
+        .content {
+            text-align: left;
         }
     </style>
 </head>
 <body>
 <div class="certificate-container">
     <img src="loko-race.png" alt="Logo" class="logo"></img>
-    <h1>Certificat de Victoire</h1>
-    <p th:text="${equipe}">Nom de l'Équipe</p>
-    <p th:text="${points}">Points : 69</p>
+    <h1>Certificat de Victoire : <span style="color: #ff5a5f" th:text="${course}"></span></h1>
+    <table>
+        <tr>
+            <td class="title">Nom de l'équipe :</td>
+            <td class="content"><span th:text="${equipe}"></span></td>
+        </tr>
+        <tr>
+            <td class="title">Rang :</td>
+            <td class="content"><span th:text="${rang}"></span></td>
+        </tr>
+        <tr>
+            <td class="title">Points :</td>
+            <td class="content"><span th:text="${points}"></span></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
