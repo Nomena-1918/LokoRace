@@ -2,31 +2,66 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Certificat de Victoire</title>
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            background-color: #867a7a;
+            background-color: #f9ed69; /* Light yellow background */
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .certificate-container {
+            width: 80%;
+            max-width: 800px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        img.logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 30px;
         }
 
         p {
             color: #333333;
             font-size: 24px;
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .signature-section div {
             text-align: center;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 5px;
-            background-color: white;
+        }
+
+        .signature-section span {
+            font-weight: bold;
+            color: #666;
         }
     </style>
 </head>
 <body>
-<h1 class="centered-text1">1er</h1>
-<h1 class="centered-text2" th:text="${equipe}"></h1>
-<h1 class="centered-text3" th:text="${points}"></h1>
+<div class="certificate-container">
+    <img src="loko-race.png" alt="Logo" class="logo"></img>
+    <h1>Certificat de Victoire</h1>
+    <p th:text="${equipe}">Nom de l'Équipe</p>
+    <p th:text="${points}">Points : 69</p>
+</div>
 </body>
 </html>

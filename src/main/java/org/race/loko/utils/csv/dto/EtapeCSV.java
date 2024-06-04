@@ -3,6 +3,7 @@ package org.race.loko.utils.csv.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.race.loko.utils.CustomDateTimeUtils;
 import org.race.loko.utils.csv.CsvBindName;
 
 import java.time.LocalDate;
@@ -61,26 +62,20 @@ public class EtapeCSV {
     }
 
     public void setDateDepart(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
-            date = date.trim();
-            // If parsing successful, format the date to yyyy-MM-dd
-            this.dateDepart = LocalDate.parse(date, formatter);
+            dateDepart = CustomDateTimeUtils.stringToDate(date);
         } catch (DateTimeParseException e) {
             // If parsing fails, throw IllegalArgumentException
-            throw new IllegalArgumentException("Invalid date format. Please use dd/MM/yyyy format.");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
-    public void setHeureDepart(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public void setHeureDepart(String time) {
         try {
-            date = date.trim();
-            // If parsing successful, format the date to HH:mm:ss
-            this.heureDepart = LocalTime.parse(date, formatter);
+            heureDepart = CustomDateTimeUtils.stringToTime(time);
         } catch (DateTimeParseException e) {
             // If parsing fails, throw IllegalArgumentException
-            throw new IllegalArgumentException("Invalid date format. Please use HH:mm:ss format.");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

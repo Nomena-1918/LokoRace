@@ -1,12 +1,15 @@
 package org.race.loko.controllers.business;
 
-import org.race.loko.models.dto.CoureurEtapeForm;
+import org.race.loko.models.business.Categorie;
 import org.race.loko.models.business.Coureur;
+import org.race.loko.models.business.views.ClassementEquipe;
+import org.race.loko.models.business.views.ClassementEquipeCategorie;
+import org.race.loko.models.dto.CoureurEtapeForm;
 import org.race.loko.models.profil.Equipe;
-import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.business.CoureurRepository;
 import org.race.loko.repositories.business.CourseRepository;
 import org.race.loko.repositories.business.EtapeRepository;
+import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.business.views.ClassementEquipeCategorieRepository;
 import org.race.loko.repositories.business.views.ClassementEquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -87,6 +90,16 @@ public class UserController {
         model.addAttribute("course", course);
         model.addAttribute("classements", classements);
 
+        List<String> listEquipe = new ArrayList<>();
+        List<Integer> listPoints = new ArrayList<>();
+        for (ClassementEquipe c : classements) {
+            listEquipe.add(c.getEquipe().getNom());
+            listPoints.add(c.getPoints());
+        }
+
+        model.addAttribute("listEquipe", listEquipe);
+        model.addAttribute("listPoints", listPoints);
+
         return "pages/classement/classement-general-equipe";
     }
 
@@ -95,8 +108,26 @@ public class UserController {
         var course = courseRepository.findLatestCourse();
         var classements = classementEquipeCategorieRepository.findByCourseId(course.getId());
 
+        // Trier les classements par nom de catégorie
+        classements.sort(Comparator.comparing(item -> item.getCategorie().getNom()));
+
+        // Regrouper les classements par catégorie
+        Map<Categorie, List<ClassementEquipeCategorie>> groupedByCategory = classements.stream()
+                .collect(Collectors.groupingBy(ClassementEquipeCategorie::getCategorie));
+
         model.addAttribute("course", course);
-        model.addAttribute("classements", classements);
+        model.addAttribute("groupedByCategory", groupedByCategory);
+
+        // Données pour Charts
+        var categoriesData = groupedByCategory.entrySet().stream()
+                .map(entry -> new HashMap<String, Object>() {{
+                    put("id", entry.getKey().getId());
+                    put("labels", entry.getValue().stream().map(item -> item.getEquipe().getNom()).collect(Collectors.toList()));
+                    put("data", entry.getValue().stream().map(ClassementEquipeCategorie::getPoints).collect(Collectors.toList()));
+                }}).collect(Collectors.toList());
+
+        model.addAttribute("categoriesData", categoriesData);
+
 
         return "pages/classement/classement-general-equipe-categorie";
     }

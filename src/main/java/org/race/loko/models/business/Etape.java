@@ -3,7 +3,7 @@ package org.race.loko.models.business;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.race.loko.utils.DateTimeUtils;
+import org.race.loko.utils.CustomDateTimeUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,7 +55,7 @@ public class Etape {
     }
 
     public String getDateHeureDebutStr() {
-        return DateTimeUtils.formatFR(dateHeureDebut);
+        return CustomDateTimeUtils.formatFR(dateHeureDebut);
     }
 
     public Etape setId(Long id) {

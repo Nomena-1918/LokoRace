@@ -17,6 +17,12 @@ public class ImportEtapeRepository {
 
 
     public void createTemporaryTable() {
+        String insertCourseQuery = """
+                INSERT INTO courses (nom, date_debut, date_fin)
+                VALUES ('ULTIMATE TEAM RACE', '2024-06-01', '2024-06-02')
+                """;
+        jdbcTemplate.update(insertCourseQuery);
+
         String createTableQuery = """
                 CREATE TEMPORARY TABLE import_etape (
                       etape VARCHAR(255),
@@ -39,12 +45,6 @@ public class ImportEtapeRepository {
     }
 
     public void importDataIntoTables() {
-        String insertCourseQuery = """
-                INSERT INTO courses (nom, date_debut, date_fin)
-                VALUES ('ULTIMATE TEAM RACE', '2024-06-01', '2024-06-02')
-                """;
-        jdbcTemplate.update(insertCourseQuery);
-
 
         String insertEtapeQuery = """
                 INSERT INTO etapes (nom, distance_km, dateheure_debut, rang_etape, nombre_coureur_equipe, id_course)

@@ -2,16 +2,21 @@ package org.race.loko.controllers.export;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-@RestController
-//@RequestMapping("/user")
+//@RestController
+@RequestMapping("/user")
+
+@Controller
 public class ExportController {
     ExportService exportService;
 
@@ -20,7 +25,8 @@ public class ExportController {
         this.exportService = exportService;
     }
 
-    @GetMapping("/export")
+    /*@GetMapping("/export")
+    @ResponseBody
     public void generatePdf(HttpServletResponse response) throws IOException {
         Map<String , Object> objects = Map.of(
                 "equipe" , "Equipe TEST",
@@ -31,7 +37,18 @@ public class ExportController {
         response.setHeader("Content-Disposition", "attachment; filename=certificat.pdf");
 
         OutputStream writer = response.getOutputStream();
-        exportService.exportPdf("templates/export/export" , objects , writer);
+        exportService.exportPdf("templates/export/exportPDF" , objects , writer);
         writer.close();
+
+    }*/
+
+    @GetMapping("/export")
+    public String generatePdf(Model model) throws IOException {
+
+        model.addAttribute("equipe" , "Equipe TEST");
+        model.addAttribute("points", "69");
+
+        return "export/exportPDF";
     }
+
 }

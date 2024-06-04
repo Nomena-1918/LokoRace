@@ -1,59 +1,67 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<style>
+    .image-container {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+    .image-container img {
+        width: 100%;
+        display: block;
+    }
+    .centered-text1, .centered-text2, .centered-text3 {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #000060;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+    .centered-text1{
+        top: 10%;
+        left: 50%;
+        font-size: 70px;
+    }
+    .centered-text2{
+        top: 20%;
+        left: 50%;
+        font-size: 67px;
+    }
+    .centered-text3{
+        top: 50%;
+        left: 50%;
+        font-size: 70px;
+    }
+</style>
 
-    <style>
-        .image-container {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
-        .image-container img {
-            width: 100%;
-            display: block;
-        }
-
-        .centered-text1, .centered-text2, .centered-text3 {
-            position: absolute;
-            top: 41%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #000060;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        .centered-text1 {
-            top: 20%;
-            left: 50%;
-            font-size: 70px;
-        }
-
-        .centered-text2 {
-            top: 41%;
-            left: 50%;
-            font-size: 67px;
-        }
-
-        .centered-text3 {
-            top: 65%;
-            left: 50%;
-            font-size: 45px;
-        }
-    </style>
-</head>
-
-<body>
 <div class="container text-center">
     <div class="image-container" id="pdf">
-        <img th:src="@{/export/loko-race.png}" alt="Certificate">
+        <img src="loko-race.png" alt="Certificate">
         <h1 class="centered-text1">1er</h1>
         <h1 class="centered-text2" th:text="${equipe}"></h1>
         <h1 class="centered-text3" th:text="${points}"></h1>
     </div>
 </div>
-</body>
-</html>
+
+<script>
+    const element = document.getElementById('pdf');
+    const opt = {
+        margin: 10, // Set margins in mm
+        filename: 'File.pdf', // Set the file name
+        image: { type: 'jpeg', quality: 0.98 }, // Image options
+        html2canvas: { scale: 0.75 }, // Scale for html2canvas
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }, // Set PDF options
+        pagebreak: { mode: ['avoid-all'] } // Pagebreak options
+    };
+    async function generateAndRedirect() {
+        try {
+            await html2pdf().from(element).set(opt).save();
+            window.location.href = "http://localhost:8082/user/classement-general-equipe";
+        } catch (error) {
+            console.error("Erreur lors de la génération du PDF :", error);
+        }
+    }
+    generateAndRedirect();
+</script>

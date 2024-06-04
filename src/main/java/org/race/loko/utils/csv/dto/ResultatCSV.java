@@ -3,6 +3,7 @@ package org.race.loko.utils.csv.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.race.loko.utils.CustomDateTimeUtils;
 import org.race.loko.utils.csv.CsvBindName;
 
 import java.time.LocalDate;
@@ -59,16 +60,12 @@ public class ResultatCSV {
         this.genre = genre.trim();
     }
 
-
     public void setDateNaissance(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
-            date = date.trim();
-            // If parsing successful, format the date to yyyy-MM-dd
-            this.dateNaissance = LocalDate.parse(date, formatter);
+            dateNaissance = CustomDateTimeUtils.stringToDate(date);
         } catch (DateTimeParseException e) {
             // If parsing fails, throw IllegalArgumentException
-            throw new IllegalArgumentException("Invalid date format. Please use dd/MM/yyyy format.");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -77,14 +74,11 @@ public class ResultatCSV {
     }
 
     public void setArrivee(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         try {
-            date = date.trim();
-            // If parsing successful, format the date to yyyy-MM-dd HH:mm:ss
-            this.arrivee = LocalDateTime.parse(date, formatter);
+            arrivee = CustomDateTimeUtils.stringToDateTime(date);
         } catch (DateTimeParseException e) {
             // If parsing fails, throw IllegalArgumentException
-            throw new IllegalArgumentException("Invalid date format. Please use dd/MM/yyyy format.");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

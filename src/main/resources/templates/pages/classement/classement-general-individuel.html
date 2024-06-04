@@ -34,8 +34,8 @@
                         <td th:text="${item.rangCoureur}"></td>
                         <td th:text="${item.coureurEtape.coureur.equipe.nom}"></td>
                         <td th:text="${item.coureurEtape.coureur.getNumeroDossard() + ' : '+ item.coureurEtape.coureur.nom +' '+ item.coureurEtape.coureur.prenom}"></td>
-                        <td th:text="${T(org.race.loko.utils.DateTimeUtils).formatFR(item.coureurEtape.dateHeureDepart)}"></td>
-                        <td th:text="${T(org.race.loko.utils.DateTimeUtils).formatFR(item.coureurEtape.dateHeureArrivee)}"></td>
+                        <td th:text="${T(org.race.loko.utils.CustomDateTimeUtils).formatFR(item.coureurEtape.dateHeureDepart)}"></td>
+                        <td th:text="${T(org.race.loko.utils.CustomDateTimeUtils).formatFR(item.coureurEtape.dateHeureArrivee)}"></td>
                         <td th:text="${item.points}"></td>
                     </tr>
                     </tbody>

@@ -4,10 +4,9 @@ import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Type;
 import org.race.loko.models.profil.Equipe;
-import org.race.loko.utils.DateTimeUtils;
+import org.race.loko.utils.CustomDateTimeUtils;
 
 import java.time.Duration;
 
@@ -37,6 +36,6 @@ public class PenaliteEtapeEquipe {
     }
 
     public String getDureePenaliteStr() {
-        return DateTimeUtils.formatDuration(dureePenalite);
+        return CustomDateTimeUtils.formatDuration(dureePenalite);
     }
 }

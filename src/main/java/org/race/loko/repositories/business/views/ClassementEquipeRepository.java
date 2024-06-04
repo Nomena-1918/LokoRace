@@ -11,4 +11,8 @@ public interface ClassementEquipeRepository extends JpaRepository<ClassementEqui
     @Query(value = "select c from ClassementEquipe c where c.course.id = ?1")
     List<ClassementEquipe> findByCourseId(Long courseId);
 
+    // FIND BESTS
+    @Query(value = "SELECT c FROM ClassementEquipe c WHERE c.rangEquipe = (SELECT MIN(r.rangEquipe) FROM ClassementEquipe r)")
+    List<ClassementEquipe> findBestEquipe();
+
 }

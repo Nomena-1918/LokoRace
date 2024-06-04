@@ -1,18 +1,10 @@
 package org.race.loko;
 
-import org.junit.jupiter.api.Test;
-import org.race.loko.repositories.business.CoureurCategorieRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
 import org.race.loko.utils.csv.service.ImportResultatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.File;
-import java.time.Duration;
-import java.util.List;
-
-import static org.race.loko.utils.DateTimeUtils.formatDuration;
 
 @SpringBootTest
 public class ImportTest {

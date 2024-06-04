@@ -29,7 +29,7 @@ public class ExportService {
         return templateEngine.process(templateName, context);
     }
 
-    public void generatePdf(String html , OutputStream writer) throws IOException {
+    public void generatePdf(String html , OutputStream writer) {
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocumentFromString(html);
         renderer.layout();
