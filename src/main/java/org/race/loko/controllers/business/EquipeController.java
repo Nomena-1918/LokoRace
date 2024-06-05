@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.Duration;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/equipe")
@@ -49,14 +50,29 @@ public class EquipeController {
 
             coureurEtapeRepository.save(coureurEtape);
         } catch (DataAccessException e) {
-            if (e.getCause() instanceof PSQLException) {
-                redirectAttributes.addFlashAttribute("error", "Erreur lors de l'affectation du coureur : " + e.getMessage());
+            /*if (e.getCause() instanceof PSQLException psqlException) {
+                //String errorMessage = Objects.requireNonNull(psqlException.getServerErrorMessage()).getMessage();
+                //String errorMessage = "Le nombre de coureurs est dépassé";
+                redirectAttributes.addFlashAttribute("error", "Erreur lors de l'affectation du coureur : " + errorMessage);
             } else {
                 // Handle other types of DataAccessExceptions
                 redirectAttributes.addFlashAttribute("error", "Erreur lors de l'affectation du coureur : " + e.getMessage());
-            }
+            }*/
+            String errorMessage = "Le nombre de coureurs est dépassé";
+            redirectAttributes.addFlashAttribute("error", "Erreur lors de l'affectation du coureur : " + errorMessage);
             return "redirect:/user/liste-etape";
         }
+
+        catch (Exception e) {
+            String errorMessage = e.getMessage();
+            //String errorMessage = "Le nombre de coureurs est dépassé";
+
+            redirectAttributes.addFlashAttribute("error", "Erreur lors de l'affectation du coureur : " + errorMessage);
+            return "redirect:/user/liste-etape";
+        }
+
+
+
         return "redirect:/user/liste-etape";
     }
 
