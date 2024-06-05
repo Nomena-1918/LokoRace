@@ -12,10 +12,12 @@ import org.race.loko.repositories.business.EtapeRepository;
 import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.business.views.ClassementEquipeCategorieRepository;
 import org.race.loko.repositories.business.views.ClassementEquipeRepository;
+import org.race.loko.repositories.business.views.DetailClassementEquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -32,16 +34,17 @@ public class UserController {
     private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
     private final ClassementEquipeRepository classementEquipeRepository;
     private final ClassementEquipeCategorieRepository classementEquipeCategorieRepository;
-
+    private final DetailClassementEquipeRepository detailClassementEquipeRepository;
 
     @Autowired
-    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository, ClassementEquipeCategorieRepository classementEquipeCategorieRepository) {
+    public UserController(CourseRepository courseRepository, EtapeRepository etapeRepository, CoureurRepository coureurRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository, ClassementEquipeRepository classementEquipeRepository, ClassementEquipeCategorieRepository classementEquipeCategorieRepository, DetailClassementEquipeRepository detailClassementEquipeRepository) {
         this.courseRepository = courseRepository;
         this.etapeRepository = etapeRepository;
         this.coureurRepository = coureurRepository;
         this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
         this.classementEquipeRepository = classementEquipeRepository;
         this.classementEquipeCategorieRepository = classementEquipeCategorieRepository;
+        this.detailClassementEquipeRepository = detailClassementEquipeRepository;
     }
 
     @GetMapping("/home")
@@ -97,6 +100,14 @@ public class UserController {
         return "pages/classement/classement-general-individuel";
     }
 
+    @GetMapping("/classement-general-individuel-etape/{nom}")
+    public String classementGeneralIndividuel(@PathVariable("nom") String etape , Model model) {
+        var detailClassementEquipes = detailClassementEquipeRepository.findAllByEquipeNomOrderByEtapeRangEtape(etape);
+        model.addAttribute("details", detailClassementEquipes);
+
+        return "pages/classement/classement-general-individuel-etape";
+    }
+
 
     @GetMapping("/classement-general-equipe")
     public String classementGeneralEquipe(Model model) {
@@ -130,6 +141,8 @@ public class UserController {
         // Regrouper les classements par catégorie
         Map<Categorie, List<ClassementEquipeCategorie>> groupedByCategory = classements.stream()
                 .collect(Collectors.groupingBy(ClassementEquipeCategorie::getCategorie));
+
+        //groupedByCategory = new LinkedHashMap<>(groupedByCategory);
 
         // ASSIGNATION COULEUR EX AQUEO
         String couleur = "bg-success text-dark";

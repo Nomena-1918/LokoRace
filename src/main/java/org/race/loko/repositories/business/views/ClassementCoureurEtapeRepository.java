@@ -13,4 +13,12 @@ public interface ClassementCoureurEtapeRepository extends JpaRepository<Classeme
     @Query(value = "select c from ClassementCoureurEtape c where c.coureurEtape.etape.course.id = ?1 AND c.coureurEtape.etape.id =?2 ORDER BY c.rangCoureur")
     List<ClassementCoureurEtape> findByCourseIdAndEtapeId(Long courseId, Long etapeId);
 
+    @Query(value = """
+            select c.coureurEtape.etape, sum(c.points)
+            from ClassementCoureurEtape c
+            where c.coureurEtape.etape.course.id = ?1
+             AND c.coureurEtape.coureur.equipe.id =?2 ORDER BY c.rangCoureur
+     """)
+    List<Object> findByCourseIdAndEquipeId(Long courseId, Long equipeId);
+
 }

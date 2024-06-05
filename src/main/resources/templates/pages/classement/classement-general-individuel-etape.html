@@ -8,12 +8,12 @@
 <div layout:fragment="content" class="container">
     <div class="card">
         <div class="card-header">
-            <h1 class="card-title">Classement général individuel : <span th:class="h2" th:text="${course.nom}"></span>
+            <h1 class="card-title">Détail classement</span>
             </h1>
         </div>
-        <h2 class="px-4 py-2"> Etape : <span th:class="text-primary"
+        <!--<h2 class="px-4 py-2"> Etape : <span th:class="text-primary"
                                            th:text="${classements.get(0).getCoureurEtape().getEtape().getNom()}"></span>
-        </h2>
+        </h2>-->
         <p th:if="${error}" th:text="${error}" class="text-danger py-1"></p>
         <div class="card-body">
             <div class="table-responsive">
@@ -21,27 +21,18 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <!-- (nom coureur, genre, chrono, pénalité, temps final, rang) -->
                         <th scope="col">Equipe</th>
-                        <th scope="col">Coureur</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Chrono</th>
-                        <th scope="col">Pénalité</th>
-                        <th scope="col">Temps final</th>
-                        <th scope="col">Rang</th>
+                        <th scope="col">Rang étape</th>
+                        <th scope="col">Etape</th>
                         <th scope="col">Points</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item, iterStat : ${classements}">
+                    <tr th:each="item, iterStat : ${details}">
                         <td th:text="${iterStat.count}"></td>
-                        <td th:text="${item.coureurEtape.coureur.equipe.nom}"></td>
-                        <td th:text="${item.coureurEtape.coureur.nom}"></td>
-                        <td th:text="${item.coureurEtape.coureur.genre.nom}"></td>
-                        <td th:text="${item.getChronoStr()}"></td>
-                        <td th:text="${item.getDureePenaliteStr()}"></td>
-                        <td th:text="${item.getTempsFinalStr()}"></td>
-                        <td th:text="${item.rangCoureur}"></td>
+                        <td th:text="${item.equipe.nom}"></td>
+                        <td th:text="${item.etape.rangEtape}"></td>
+                        <td th:text="${item.etape.nom}"></td>
                         <td th:text="${item.points}"></td>
                     </tr>
                     </tbody>

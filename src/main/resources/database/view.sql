@@ -179,3 +179,18 @@ GROUP BY c.id_equipe,
          ce.id_etape, ce.duree_penalite, e.id_course, e.nom, eq.nom
 order by e.id_course, ce.id_etape, c.id_equipe;
  */
+
+--drop view v_rang_coureur_etape_extend
+
+create view v_rang_coureur_etape_extend as
+    select vrce.*, coalesce(pc.points, 0) as points
+    from v_rang_coureur_etape vrce
+    left join point_classements pc on pc.rang = vrce.rang_coureur;
+
+
+--- DETAIL
+create view  v_detail_classement_equipe as
+SELECT row_number() over () as id, id_equipe, nom_equipe, id_etape, sum(points) as points
+    FROM v_rang_coureur_etape_extend vrcee
+group by id_equipe, id_etape, nom_equipe
+order by id_etape;

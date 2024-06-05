@@ -38,7 +38,9 @@
                     <tbody>
                     <tr th:each="item : ${classements}">
                         <td th:text="${item.rangEquipe}"></td>
-                        <td th:text="${item.equipe.nom}"></td>
+
+                        <td> <a th:href="@{/user/classement-general-individuel-etape/{nom}(nom=${item.equipe.nom})}" th:text="${item.equipe.nom}"></a> </td>
+
                         <td th:text="${item.points}"></td>
                     </tr>
                     </tbody>
