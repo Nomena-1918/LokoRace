@@ -2,8 +2,6 @@ package org.race.loko.controllers.business;
 
 import org.race.loko.models.business.Categorie;
 import org.race.loko.models.business.Coureur;
-import org.race.loko.models.business.Etape;
-import org.race.loko.models.business.views.ClassementCoureurEtape;
 import org.race.loko.models.business.views.ClassementEquipe;
 import org.race.loko.models.business.views.ClassementEquipeCategorie;
 import org.race.loko.models.dto.CoureurEtapeForm;
@@ -100,7 +98,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/classement-general-equipe")
     public String classementGeneralEquipe(Model model) {
         var course = courseRepository.findLatestCourse();
@@ -133,6 +130,22 @@ public class UserController {
         // Regrouper les classements par catégorie
         Map<Categorie, List<ClassementEquipeCategorie>> groupedByCategory = classements.stream()
                 .collect(Collectors.groupingBy(ClassementEquipeCategorie::getCategorie));
+
+        // ASSIGNATION COULEUR EX AQUEO
+        String couleur = "bg-success text-dark";
+        ClassementEquipeCategorie precedent, actuelle;
+        for (Map.Entry<Categorie, List<ClassementEquipeCategorie>> entry : groupedByCategory.entrySet()) {
+            for (int i = 1; i < entry.getValue().size(); i++) {
+                precedent = entry.getValue().get(i - 1);
+                actuelle = entry.getValue().get(i);
+
+                if (Objects.equals(actuelle.getRangEquipe(), precedent.getRangEquipe())) {
+                    precedent.couleur = couleur;
+                    actuelle.couleur = couleur;
+                }
+            }
+        }
+
 
         model.addAttribute("course", course);
         model.addAttribute("groupedByCategory", groupedByCategory);

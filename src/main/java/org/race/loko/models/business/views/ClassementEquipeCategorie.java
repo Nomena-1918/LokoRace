@@ -48,6 +48,9 @@ public class ClassementEquipeCategorie {
                 .toString();
     }
 
+    @Transient
+    public String couleur;
+/*
     public String getCouleur() {
         String c = categorie.getNom();
         c = switch (c) {
@@ -59,4 +62,6 @@ public class ClassementEquipeCategorie {
         };
         return c;
     }
+*/
+
 }
