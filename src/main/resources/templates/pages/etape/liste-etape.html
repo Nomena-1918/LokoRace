@@ -22,7 +22,10 @@
                         <th scope="col">Date heure début</th>
                         <th scope="col">Rang</th>
                         <th scope="col">Nb coureurs</th>
-                        <th scope="col" th:if="${#strings.equalsIgnoreCase(session.user.getClass().getSimpleName(), 'Equipe')}">Coureurs affectés</th>
+                        <th scope="col"
+                            th:if="${#strings.equalsIgnoreCase(session.user.getClass().getSimpleName(), 'Equipe')}">
+                            Coureurs affectés
+                        </th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -36,7 +39,8 @@
                         <td th:text="${etape.nombreCoureurEquipe}"></td>
                         <td th:if="${#strings.equalsIgnoreCase(session.user.getClass().getSimpleName(), 'Equipe')}">
                             <ul>
-                                <li th:each="coureurEtape : ${etape.coureursEtape}" th:if="${coureurEtape.coureur.equipe.id == (session.user).getId()}">
+                                <li th:each="coureurEtape : ${etape.coureursEtape}"
+                                    th:if="${coureurEtape.coureur.equipe.id == (session.user).getId()}">
                                     <span th:text="${coureurEtape.coureur.getNumeroDossard() + ' - ' + coureurEtape.coureur.nom + ' ' + coureurEtape.coureur.prenom + ' ' + coureurEtape.getDureeEtape()}"></span><br/>
                                 </li>
                             </ul>
@@ -96,11 +100,13 @@
                                                 th:attr="data-bs-target=${'#affecterTempsCoureurModal_' + etape.id}">
                                             Affecter temps coureurs
                                         </button>
-                                        <button type="button" class="btn btn-outline-info">
-                                            <a th:href="@{/admin/classement-general-individuel-etape/{id}(id=${etape.id})}">
+                                        <a
+                                           th:href="@{/admin/classement-general-individuel-etape/{id}(id=${etape.id})}">
+                                            <button type="button" class="btn btn-outline-success">
                                                 Voir résultat
-                                            </a>
-                                        </button>
+                                            </button>
+                                        </a>
+
                                         <!-- Modal pour affecter un coureur -->
                                         <div class="modal fade text-left"
                                              th:id="${'affecterTempsCoureurModal_' + etape.id}" tabindex="-1"
@@ -132,7 +138,8 @@
 
                                                             <div class="form-group p-2">
                                                                 <label class="col-form-label">Temps : </label>
-                                                                <input type="time" step="1" class="form-control" name="temps"/>
+                                                                <input type="time" step="1" class="form-control"
+                                                                       name="temps"/>
                                                             </div>
 
                                                         </div>
