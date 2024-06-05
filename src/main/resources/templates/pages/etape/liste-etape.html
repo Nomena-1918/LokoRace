@@ -92,9 +92,14 @@
                                 </div>
                                 <div th:case="Admin">
                                     <div class="px-2">
-                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                                 th:attr="data-bs-target=${'#affecterTempsCoureurModal_' + etape.id}">
                                             Affecter temps coureurs
+                                        </button>
+                                        <button type="button" class="btn btn-outline-info">
+                                            <a th:href="@{/admin/classement-general-individuel-etape/{id}(id=${etape.id})}">
+                                                Voir résultat
+                                            </a>
                                         </button>
                                         <!-- Modal pour affecter un coureur -->
                                         <div class="modal fade text-left"

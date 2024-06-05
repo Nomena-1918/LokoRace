@@ -39,7 +39,19 @@ public class ClassementCoureurEtape {
     @Column(name = "duree_penalite", columnDefinition = "interval")
     private Duration dureePenalite;
 
+
+    public String getChronoStr() {
+        return CustomDateTimeUtils.formatDuration(coureurEtape.getDureeEtape());
+    }
+
+
     public String getDureePenaliteStr() {
         return CustomDateTimeUtils.formatDuration(dureePenalite);
     }
+
+
+    public String getTempsFinalStr() {
+        return CustomDateTimeUtils.formatDuration(coureurEtape.getDureeEtape().plus(dureePenalite));
+    }
+
 }

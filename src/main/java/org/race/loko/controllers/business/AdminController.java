@@ -9,6 +9,7 @@ import org.race.loko.models.business.CoureurEtape;
 import org.race.loko.models.dto.PenaliteEquipeForm;
 import org.race.loko.models.profil.Equipe;
 import org.race.loko.repositories.business.*;
+import org.race.loko.repositories.business.views.ClassementCoureurEtapeRepository;
 import org.race.loko.repositories.profil.EquipeRepository;
 import org.race.loko.utils.csv.service.ImportEtapeService;
 import org.race.loko.utils.csv.service.ImportPointService;
@@ -41,9 +42,10 @@ public class AdminController {
     private final PenaliteEtapeEquipeRepository penaliteEtapeEquipeRepository;
     private final EtapeRepository etapeRepository;
     private final EquipeRepository equipeRepository;
+    private final ClassementCoureurEtapeRepository classementCoureurEtapeRepository;
 
     @Autowired
-    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository, CourseRepository courseRepository, PenaliteEtapeEquipeRepository penaliteEtapeEquipeRepository, EtapeRepository etapeRepository, EquipeRepository equipeRepository) {
+    public AdminController(CoureurEtapeRepository coureurEtapeRepository, ImportEtapeService importEtapeService, ImportPointService importPointService, ImportResultatService importResultatService, CoureurCategorieRepository coureurCategorieRepository, CourseRepository courseRepository, PenaliteEtapeEquipeRepository penaliteEtapeEquipeRepository, EtapeRepository etapeRepository, EquipeRepository equipeRepository, ClassementCoureurEtapeRepository classementCoureurEtapeRepository) {
         this.coureurEtapeRepository = coureurEtapeRepository;
         this.importEtapeService = importEtapeService;
         this.importPointService = importPointService;
@@ -53,6 +55,7 @@ public class AdminController {
         this.penaliteEtapeEquipeRepository = penaliteEtapeEquipeRepository;
         this.etapeRepository = etapeRepository;
         this.equipeRepository = equipeRepository;
+        this.classementCoureurEtapeRepository = classementCoureurEtapeRepository;
     }
 
     @GetMapping("/home")
@@ -225,7 +228,22 @@ public class AdminController {
         return "redirect:/admin/penalite-equipe";
     }
 
+///////////// JOUR 4 ////////////
 
+    @GetMapping("/classement-general-individuel-etape/{id}")
+    public String classementGeneralIndividuelEtape(@PathVariable("id") Long idEtape, Model model) {
+        var course = courseRepository.findLatestCourse();
+        var classements = classementCoureurEtapeRepository.findByCourseIdAndEtapeId(course.getId(), idEtape);
+
+        model.addAttribute("course", course);
+        model.addAttribute("classements", classements);
+
+        return "pages/classement/classement-general-individuel-etape";
+    }
+
+
+
+/////////////////////////////
 
 
 }

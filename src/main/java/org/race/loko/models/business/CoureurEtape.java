@@ -33,8 +33,12 @@ public class CoureurEtape {
     @Column(name = "dateheure_arrivee")
     private LocalDateTime dateHeureArrivee;
 
-    public String getDureeEtape() {
+    public String getDureeEtapeStr() {
         return Objects.requireNonNullElse(CustomDateTimeUtils.formatDuration(Duration.between(dateHeureDepart, dateHeureArrivee)), "");
+    }
+
+    public Duration getDureeEtape() {
+        return Duration.between(dateHeureDepart, dateHeureArrivee);
     }
 
 }
