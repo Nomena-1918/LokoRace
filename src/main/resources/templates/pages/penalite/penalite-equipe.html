@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="dureePenalite">Durée de pénalité (HH:mm:ss)</label>
-                                    <input type="time" step="1" class="form-control" th:field="*{dureePenalite}" id="dureePenalite" name="dureePenalite" placeholder="00:00:00">
+                                    <input type="time" step="1" th:value="'00:00:00'" class="form-control" th:field="*{dureePenalite}" id="dureePenalite" name="dureePenalite">
                                 </div>
                             </div>
                             <div class="modal-footer">

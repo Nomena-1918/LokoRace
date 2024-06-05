@@ -10,7 +10,7 @@ import java.time.LocalTime;
 public class PenaliteEquipeForm {
     Long etape;
     Long equipe;
-    LocalTime dureePenalite;
+    LocalTime dureePenalite = LocalTime.parse("00:00:00");
 
     public PenaliteEquipeForm() {
     }
