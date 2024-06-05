@@ -198,7 +198,7 @@ public class AdminController {
                                   RedirectAttributes redirectAttributes) {
         try {
             PenaliteEtapeEquipe penalite = new PenaliteEtapeEquipe();
-            penalite.setEtape(new Etape().setId(penaliteEquipeForm.getEquipe()));
+            penalite.setEtape(new Etape().setId(penaliteEquipeForm.getEtape()));
             penalite.setEquipe(new Equipe().setId(penaliteEquipeForm.getEquipe()));
             Duration dureePenalite = Duration.between(LocalTime.MIDNIGHT, penaliteEquipeForm.getDureePenalite());
 
