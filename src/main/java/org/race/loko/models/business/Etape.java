@@ -55,7 +55,7 @@ public class Etape {
     }
 
     public String getDateHeureDebutStr() {
-        return CustomDateTimeUtils.formatFR(dateHeureDebut);
+        return CustomDateTimeUtils.format(dateHeureDebut);
     }
 
     public Etape setId(Long id) {
