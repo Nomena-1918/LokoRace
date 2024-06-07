@@ -15,7 +15,7 @@ import java.util.List;
 
 /*
 
-    Méthodes Import (Excel, CSV) "ELT" :
+    Méthodes Import (Excel, CSV) "ELT : Extract Load Transform" :
 
     Nettoyer les données (trim)
     Transformer en liste d'objets exactement
