@@ -101,7 +101,7 @@ public class UserController {
     }
 
     @GetMapping("/classement-general-individuel-etape/{nom}")
-    public String classementGeneralIndividuel(@PathVariable("nom") String etape , Model model) {
+    public String classementGeneralIndividuel(@PathVariable("nom") String etape, Model model) {
         var detailClassementEquipes = detailClassementEquipeRepository.findAllByEquipeNomOrderByEtapeRangEtape(etape);
         model.addAttribute("details", detailClassementEquipes);
 
