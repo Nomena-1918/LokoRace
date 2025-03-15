@@ -104,10 +104,3 @@ create table penalite_etape_equipe(
     id_equipe int references equipes(id),
     duree_penalite interval not null check ( duree_penalite >= '00:00:00'::interval )
 );
-
-insert into penalite_etape_equipe(id_etape, id_equipe, duree_penalite)
-values (1, 1, '01:00:00'),
-       (1, 1, '01:00:00'),
-
-       (2, 2, '01:00:00'),
-       (3, 3, '00:00:10');
